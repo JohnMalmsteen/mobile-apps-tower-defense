@@ -32,7 +32,7 @@ public class Unit {
 	}
 
 	public int UnarmedAttack(Unit target){
-		int damage = (int)Random.Range (1, 4);
+		int damage = (int)Random.Range (1, 3);
 		damage += str;
 
 		int atkRoll = (int)Random.Range (1, 21);
