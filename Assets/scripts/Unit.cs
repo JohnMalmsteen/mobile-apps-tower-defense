@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Unit : MonoBehaviour {
+	public int XP;
+	public int BAB;
 	public int maxHealth;
 	public int health;
 	public int str;
@@ -11,6 +13,7 @@ public class Unit : MonoBehaviour {
 	public int hitDie;
 	public int armorClass;
 	public int [] position = new int[2];
+	public int numOfAttacks;
 
 	void Start(){
 		hitDie = 8;
@@ -22,14 +25,30 @@ public class Unit : MonoBehaviour {
 		position [0] = 0;
 		position [1] = 0;
 		armorClass = 10 + dex;
-		Debug.Log (this.ToString ());
+		XP = 0;
+		BAB = 0;
+		numOfAttacks = 1;
 	}
 
-	public int Attack(Unit target){
-		int damage = (int)Random.Range (1, 3);
+	public int UnarmedAttack(Unit target){
+		int damage = (int)Random.Range (1, 4);
 		damage += str;
 
-		return damage;
+		int atkRoll = (int)Random.Range (1, 21);
+
+		atkRoll += str;
+
+		if (atkRoll >= target.armorClass) {
+			target.health -= damage;
+			if(target.health > 0){
+				return 1;
+			}else{
+				return 2;
+			}
+		} else {
+			return 0;
+		}
+
 	}
 
 	public void Move(int [] destination){
@@ -44,7 +63,7 @@ public class Unit : MonoBehaviour {
 
 		for (int i = 0; i < 4; i++) {
 			int roll = 0;
-			if((roll = (int)Random.Range(1, 6)) < lowest){
+			if((roll = (int)Random.Range(1, 7)) < lowest){
 				lowest = roll;
 			}
 
@@ -62,7 +81,7 @@ public class Unit : MonoBehaviour {
 		return score;
 	}
 
-	public string ToString(){
+	public override string ToString(){
 		string ret = "Unit: \nMax Health: " + maxHealth + "\nCurrent Health: " + health + "\nStrength: " 
 			+ str + "\nDex: " + dex + "\nConstituion: " + con + "\nAC: " + armorClass;
 		return ret;
