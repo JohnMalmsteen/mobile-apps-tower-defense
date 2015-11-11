@@ -13,7 +13,7 @@ public class Wolf : Unit
 		numOfAttacks = 1;
 	}
 
-	public int UnarmedAttack(Unit target){
+	public override int UnarmedAttack(Unit target){
 		int damage = (int)Random.Range (1, 7);
 		damage += str;
 		
@@ -21,14 +21,21 @@ public class Wolf : Unit
 		
 		atkRoll += str;
 		
-		if (atkRoll >= target.armorClass) {
+		if (atkRoll >= target.armorClass) 
+		{
 			target.health -= damage;
-			if(target.health > 0){
+
+			if(target.health > 0)
+			{
 				return 1;
-			}else{
+			}
+			else
+			{
 				return 2;
 			}
-		} else {
+		} 
+		else 
+		{
 			return 0;
 		}
 		

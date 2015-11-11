@@ -31,7 +31,7 @@ public class Unit {
 		numOfAttacks = 1;
 	}
 
-	public int UnarmedAttack(Unit target){
+	public virtual int UnarmedAttack(Unit target){
 		int damage = (int)Random.Range (1, 3);
 		damage += str;
 
@@ -39,14 +39,20 @@ public class Unit {
 
 		atkRoll += str;
 
-		if (atkRoll >= target.armorClass) {
+		if (atkRoll >= target.armorClass) 
+		{
 			target.health -= damage;
-			if(target.health > 0){
+			if(target.health > 0)
+			{
 				return 1;
-			}else{
+			}
+			else
+			{
 				return 2;
 			}
-		} else {
+		} 
+		else 
+		{
 			return 0;
 		}
 
