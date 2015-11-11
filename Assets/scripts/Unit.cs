@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Unit : MonoBehaviour {
+public class Unit {
 	public int XP;
 	public int BAB;
 	public int maxHealth;
@@ -15,7 +15,7 @@ public class Unit : MonoBehaviour {
 	public int [] position = new int[2];
 	public int numOfAttacks;
 
-	void Start(){
+	public Unit(){
 		hitDie = 8;
 		str = GetAbilityScore ();
 		dex = GetAbilityScore ();

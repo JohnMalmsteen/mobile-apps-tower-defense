@@ -16,19 +16,19 @@ public class Sorcerer : ClassType {
 		babType = "poor";
 	}
 
-	public void levelUp(int lev)
+	public override void levelUp()
 	{
-		if(lev % 2 == 0)
+		if(level % 2 == 0)
 		{
 			willSave += 1;
 		}
-		else if(lev % 3 == 0)
+		else if(level % 3 == 0)
 		{
 			refSave += 1;
 			conSave += 1;
 		}
 
-		for(int i = 0; i < (int)((float)lev/2f); i++)
+		for(int i = 0; i < (int)((float)level/2f); i++)
 		{
 			if(spellsPerDay[i] == 0)
 			{

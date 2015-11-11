@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Fighter : ClassType {
@@ -11,12 +11,12 @@ public class Fighter : ClassType {
 		babType = "good";
 	}
 
-	public void levelUp(int lev){
-		if(lev % 2 == 0)
+	public override void levelUp(){
+		if(level % 2 == 0)
 		{
 			refSave += 1;
 		}
-		else if(lev % 3 == 0)
+		else if(level % 3 == 0)
 		{
 			conSave += 1;
 			willSave += 1;

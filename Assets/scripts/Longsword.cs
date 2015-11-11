@@ -35,13 +35,15 @@ public class Longsword : Weapon {
 		}
 		else
 		{
+			Debug.Log("did " + hitdamage + " damage");
 			return 0;
 		}
 
 		target.health -= hitdamage;
-
+		Debug.Log("did " + hitdamage + " damage");
 		if(target.health < 0)
 		{
+
 			return 1;
 		}
 		else
