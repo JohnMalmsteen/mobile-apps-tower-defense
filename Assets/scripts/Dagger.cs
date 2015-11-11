@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Longsword : Weapon {
-	public Longsword()
+public class Dagger : Weapon, IRangedAttack {
+
+	public Dagger()
 	{
-		range = 0;
-		ranged = false;
-		damage = 6;
-		critEffect = 2;
+		range = 10;
+		ranged = true;
+		damage = 3;
 		minCrit = 20;
+		critEffect = 2;
 	}
 
 	public override int WeaponAttack(Unit target, int attackBonus, int damageBuff)
@@ -39,12 +40,12 @@ public class Longsword : Weapon {
 			Debug.Log("did " + hitdamage + " damage");
 			return 0;
 		}
-
+		
 		target.health -= hitdamage;
 		Debug.Log("did " + hitdamage + " damage");
 		if(target.health < 0)
 		{
-
+			
 			return 1;
 		}
 		else
@@ -52,4 +53,11 @@ public class Longsword : Weapon {
 			return 2;
 		}
 	}
+
+	public int rangedAttack(Unit target, int attackBonus, int damageBonus, int autoFailChance)
+	{
+		int ret = WeaponAttack(target, attackBonus, damageBonus);
+		return ret;
+	}
+
 }

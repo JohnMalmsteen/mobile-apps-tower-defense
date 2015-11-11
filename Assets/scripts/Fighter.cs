@@ -9,6 +9,10 @@ public class Fighter : ClassType {
 		conSave = 0;
 		willSave = 0;
 		babType = "good";
+		armor.armorClassBonus = 5;
+		armor.armorCheckPenality = 1;
+		armor.spellFailPenalty = 50;
+		armor.name = "Studded Leather";
 	}
 
 	public override void levelUp(){

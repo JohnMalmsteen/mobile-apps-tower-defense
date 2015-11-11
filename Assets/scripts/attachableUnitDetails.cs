@@ -1,8 +1,11 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class attachableUnitDetails : MonoBehaviour {
 
+	public int gold;
+	public List<Weapon> inventoryWeapons =  new List<Weapon>();
 	public Weapon currentEquippedWeapon;
 	public Unit unit;
 	public ClassType _class;
@@ -58,12 +61,8 @@ public class attachableUnitDetails : MonoBehaviour {
 			unit.maxHealth -= 2;
 			unit.health -= 2;
 		}
-		
-		if(_class is Fighter)
-		{
-			Debug.Log(this.ToString());
-			for(int i = 0; i < 5; i++)
-				currentEquippedWeapon.WeaponAttack(unit, unit.BAB+unit.str, unit.str);
-		}
+
+
+		gold = 100;
 	}
 }

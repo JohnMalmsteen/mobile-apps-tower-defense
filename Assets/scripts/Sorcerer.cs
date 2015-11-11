@@ -14,6 +14,7 @@ public class Sorcerer : ClassType {
 			spellsPerDay[i] = 0;
 		}
 		babType = "poor";
+		armor.name = "Sorcerers Robes";
 	}
 
 	public override void levelUp()

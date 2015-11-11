@@ -14,6 +14,7 @@ public class Unit {
 	public int armorClass;
 	public int [] position = new int[2];
 	public int numOfAttacks;
+	public bool inCombat;
 
 	public Unit(){
 		hitDie = 8;

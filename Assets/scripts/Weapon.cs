@@ -6,6 +6,7 @@ public abstract class Weapon {
 	public int damage;
 	public int minCrit;
 	public int critEffect;
+	public bool ranged;
 
 	public abstract int WeaponAttack(Unit target, int attackBonus, int damageBuff);
 }

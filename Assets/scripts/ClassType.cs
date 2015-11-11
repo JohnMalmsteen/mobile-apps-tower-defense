@@ -7,6 +7,6 @@ public abstract class ClassType {
 	public int refSave = 0;
 	public int conSave = 0;
 	public int willSave = 0;
-
+	public Armor armor = new Armor();
 	public abstract void levelUp();
 }
