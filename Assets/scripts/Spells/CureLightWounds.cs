@@ -12,6 +12,7 @@ public class CureLightWounds : Spell {
 		savingThrow = (int)SavingThrow.None;
 		spellLevel = 1;
 		type = (int)actionType.Proximity;
+		actionPhase = (int)actionClass.Attack;
 	}
 
 	public override int cast(Unit target, int autoFailChance)
