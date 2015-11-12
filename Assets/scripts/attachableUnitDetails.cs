@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class attachableUnitDetails : MonoBehaviour {
 
+	public int owner;
 	public int gold;
 	public List<Weapon> inventoryWeapons =  new List<Weapon>();
 	public Weapon currentEquippedWeapon;
@@ -62,7 +63,7 @@ public class attachableUnitDetails : MonoBehaviour {
 			unit.health -= 2;
 		}
 
-
+		owner = 0;
 		gold = 100;
 	}
 }

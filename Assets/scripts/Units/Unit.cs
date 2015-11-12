@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class Unit {
 	public int XP;
@@ -15,6 +16,7 @@ public class Unit {
 	public int [] position = new int[2];
 	public int numOfAttacks;
 	public bool inCombat;
+	public int inititiative;
 
 	public Unit(){
 		hitDie = 8;
@@ -29,13 +31,14 @@ public class Unit {
 		XP = 0;
 		BAB = 0;
 		numOfAttacks = 1;
+		inititiative = (int)UnityEngine.Random.Range(1, 21) + dex;
 	}
 
 	public virtual int UnarmedAttack(Unit target){
-		int damage = (int)Random.Range (1, 3);
+		int damage = (int)UnityEngine.Random.Range (1, 3);
 		damage += str;
 
-		int atkRoll = (int)Random.Range (1, 21);
+		int atkRoll = (int)UnityEngine.Random.Range (1, 21);
 
 		atkRoll += str;
 
@@ -58,6 +61,26 @@ public class Unit {
 
 	}
 
+	public List<Unit> isInCombat(List<Unit> enemies)
+	{
+		List<Unit> threatRangeUnits = new List<Unit>();
+
+		foreach(Unit enemy in enemies)
+		{
+			if(Math.Abs(enemy.position[0]-position[0]) == 1 && Math.Abs(enemy.position[1]-position[1]) == 1)
+			{
+				threatRangeUnits.Add(enemy);
+			}
+		}
+
+		if(threatRangeUnits.Count > 0)
+		{
+			return threatRangeUnits;
+		}
+
+		return null;
+	}
+
 	public void Move(int [] destination){
 
 	}
@@ -70,7 +93,7 @@ public class Unit {
 
 		for (int i = 0; i < 4; i++) {
 			int roll = 0;
-			if((roll = (int)Random.Range(1, 7)) < lowest){
+			if((roll = (int)UnityEngine.Random.Range(1, 7)) < lowest){
 				lowest = roll;
 			}
 
