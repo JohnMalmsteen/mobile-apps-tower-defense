@@ -17,6 +17,7 @@ public class Unit {
 	public int numOfAttacks;
 	public bool inCombat;
 	public int inititiative;
+	public int movementRange;
 
 	public Unit(){
 		hitDie = 8;
@@ -31,6 +32,7 @@ public class Unit {
 		XP = 0;
 		BAB = 0;
 		numOfAttacks = 1;
+		movementRange = 60;
 		inititiative = (int)UnityEngine.Random.Range(1, 21) + dex;
 	}
 

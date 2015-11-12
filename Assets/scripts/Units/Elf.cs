@@ -6,5 +6,6 @@ public class Elf : Unit {
 	{
 		dex += 1;
 		inititiative += 1;
+		movementRange +=10;
 	}
 }

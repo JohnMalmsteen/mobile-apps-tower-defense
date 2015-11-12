@@ -95,6 +95,11 @@ public class attachableUnitDetails : MonoBehaviour, IComparer {
 			unit.health -= 2;
 		}
 
+		if(_class is Ranger)
+		{
+			unit.movementRange += 10;
+		}
+
 		owner = 0;
 		gold = 100;
 	}
