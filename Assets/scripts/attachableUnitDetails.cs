@@ -73,6 +73,7 @@ public class attachableUnitDetails : MonoBehaviour, IComparer {
 				return -1;
 			}
 		}
+		else return 1;
 	}
 
 	void Start()

@@ -27,7 +27,7 @@ public class TurnController : MonoBehaviour {
 		List<attachableUnitDetails> combined = new List<attachableUnitDetails>(playerUnits);
 		combined.AddRange(compUnits);
 		combined.Sort();
-		combined[combined.FindLastIndex+1] = nebinsTower;
+		combined.Add(nebinsTower);
 		actionOrder = new Queue<attachableUnitDetails>(combined);
 
 	}
