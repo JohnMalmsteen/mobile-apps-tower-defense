@@ -72,6 +72,7 @@ public class Unit {
 			if(Math.Abs(enemy.position[0]-position[0]) == 1 && Math.Abs(enemy.position[1]-position[1]) == 1)
 			{
 				threatRangeUnits.Add(enemy);
+				inCombat = true;
 			}
 		}
 
