@@ -104,6 +104,7 @@ public class attachableUnitDetails : MonoBehaviour, IComparer {
 			currentEquippedWeapon = inventoryWeapons[inventoryWeapons.Count-1];
 			availableActions.Add(new ChangeWeapon());
 			availableActions.Add(currentEquippedWeapon);
+			availableActions.Add(new Move());
 		}
 
 		owner = 0;

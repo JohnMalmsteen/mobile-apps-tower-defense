@@ -11,6 +11,7 @@ public class Dagger : Weapon, IRangedAttack {
 		minCrit = 20;
 		critEffect = 2;
 		type = (int)actionType.Proximity;
+		actionPhase = (int)actionClass.Attack;
 	}
 
 	public override int WeaponAttack(Unit target, int attackBonus, int damageBuff)

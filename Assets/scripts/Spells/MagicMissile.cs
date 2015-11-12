@@ -12,6 +12,7 @@ public class MagicMissile : Spell, IRangedAttack {
 		savingThrow = (int)SavingThrow.None;
 		spellLevel = 1;
 		type = (int)actionType.Ranged;
+		actionPhase = (int)actionClass.Attack;
 	}
 
 	public int rangedAttack(Unit target, int attackBonus, int damageBonus, int autoFailChance)

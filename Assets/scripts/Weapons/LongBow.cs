@@ -11,6 +11,7 @@ public class LongBow : Weapon, IRangedAttack {
 		minCrit = 20;
 		critEffect = 3;
 		type = (int)actionType.Ranged;
+		actionPhase = (int)actionClass.Attack;
 	}
 
 	public override int WeaponAttack(Unit target, int attackBonus, int damageBuff)
