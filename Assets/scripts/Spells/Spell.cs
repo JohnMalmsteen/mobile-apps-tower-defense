@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class Spell {
+public abstract class Spell : Action {
 	public enum SpellTypes{Healing, Ranged, Proximity, Self}
 	public enum SavingThrow{None, Ref, RefHalf, Con, ConHalf, Will}
 	public int spellType;

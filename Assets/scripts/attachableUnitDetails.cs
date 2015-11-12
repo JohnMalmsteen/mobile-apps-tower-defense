@@ -10,6 +10,7 @@ public class attachableUnitDetails : MonoBehaviour, IComparer {
 	public Weapon currentEquippedWeapon;
 	public Unit unit;
 	public ClassType _class;
+	public List<Action> availableActions = new List<Action>();
 
 	public void LevelUp()
 	{
@@ -98,6 +99,11 @@ public class attachableUnitDetails : MonoBehaviour, IComparer {
 		if(_class is Ranger)
 		{
 			unit.movementRange += 10;
+			inventoryWeapons.Add(new Dagger());
+			inventoryWeapons.Add(new LongBow());
+			currentEquippedWeapon = inventoryWeapons[inventoryWeapons.Count-1];
+			availableActions.Add(new ChangeWeapon());
+			availableActions.Add(currentEquippedWeapon);
 		}
 
 		owner = 0;

@@ -11,6 +11,7 @@ public class CureMinorWounds : Spell {
 		duration = 0;
 		savingThrow = (int)SavingThrow.None;
 		spellLevel = 0;
+		type = (int)actionType.Proximity;
 	}
 	
 	public override int cast(Unit target, int autoFailChance)

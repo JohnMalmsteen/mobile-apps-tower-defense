@@ -10,6 +10,7 @@ public class LongBow : Weapon, IRangedAttack {
 		damage = 8;
 		minCrit = 20;
 		critEffect = 3;
+		type = (int)actionType.Ranged;
 	}
 
 	public override int WeaponAttack(Unit target, int attackBonus, int damageBuff)

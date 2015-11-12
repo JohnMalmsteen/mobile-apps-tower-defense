@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class Weapon {
+public abstract class Weapon : Action{
 	public int range;
 	public int damage;
 	public int minCrit;
