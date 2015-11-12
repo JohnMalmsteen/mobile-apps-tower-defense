@@ -9,6 +9,7 @@ public class Longsword : Weapon {
 		damage = 6;
 		critEffect = 2;
 		minCrit = 20;
+		type = (int)actionType.Proximity;
 	}
 
 	public override int WeaponAttack(Unit target, int attackBonus, int damageBuff)
