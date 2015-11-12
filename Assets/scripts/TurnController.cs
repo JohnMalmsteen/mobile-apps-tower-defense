@@ -9,6 +9,7 @@ public class TurnController : MonoBehaviour {
 	public static int turnCount = 0;
 	public static bool levelOver = false;
 	public static bool playerWin = false;
+	public static attachableUnitDetails currentTurnUnit;
 
 	public Queue<attachableUnitDetails> actionOrder =  new Queue<attachableUnitDetails>();
 
@@ -36,8 +37,8 @@ public class TurnController : MonoBehaviour {
 	{
 		while(!levelOver)
 		{
-			attachableUnitDetails current = actionQueue.Dequeue();
-			int result = Turn (current);
+			currentTurnUnit = actionQueue.Dequeue();
+			int result = Turn (currentTurnUnit);
 			if(result == 1)
 			{
 				levelOver = true;
