@@ -4,13 +4,11 @@ using Vectrosity;
 
 public class DrawGrid : MonoBehaviour
 {
-    public Texture LineTexture;
-
     private int GridSize;
     private List<Vector3> LinePoints;
 
     private float GridHeight = 0.3f;
-    private float LineWidth = 1.0f;
+    private float LineWidth = 0.5f;
     private string LineName = "Vectrosity Grid Line";
     private string VectrosityCamera = "VectrosityCamera";
 
@@ -27,7 +25,7 @@ public class DrawGrid : MonoBehaviour
 
         // Creating array of lines
 
-        var myLine = new VectorLine(LineName, LinePoints, LineTexture, LineWidth);
+        var myLine = new VectorLine(LineName, LinePoints, null, LineWidth);
         myLine.SetColor(Color.white);
 
         // Setting up the line

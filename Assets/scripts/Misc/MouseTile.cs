@@ -7,11 +7,11 @@ public class MouseTile : MonoBehaviour
     public GameObject SelectedTile;
     public Boolean ShowTile = false;
 
+    private float Height = 0.1f;
+
     void Update()
     {
         Vector3 position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.y));
-
-        //Debug.Log(position);
 
         if (position.x >= 0.5f && position.x <= GlobalVars.GridSize + 0.5f && position.z >= 0.5f && position.z <= GlobalVars.GridSize + 0.5f) // Mouse Cursor withing Grid
         {
@@ -37,13 +37,11 @@ public class MouseTile : MonoBehaviour
                 z = (float)Math.Floor(position.z);
             }
 
-            y = (float)Math.Floor(position.y);
+            y = Height;
 
             SelectedTile.transform.position = new Vector3(x,y,z);
 
             SelectedTile.GetComponent<MeshRenderer>().material.color = Grid.CheckAvailabilityOnGridColor(new GridVector((int)SelectedTile.transform.position.x, (int)SelectedTile.transform.position.z));
-
-            //Debug.Log(SelectedTile.transform.position);
         }
         else
             SelectedTile.gameObject.GetComponent<MeshRenderer>().enabled = false;
