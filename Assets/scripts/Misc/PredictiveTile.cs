@@ -5,8 +5,10 @@ using System.Collections.Generic;
 public class PredictiveTile : MonoBehaviour
 {
     public GameObject PredictTile;
+    public GameObject PredictiveTileHolder;
 
     private List<GameObject> PredictiveTiles = new List<GameObject>();
+    private int Count = 0;
 
     void Start()
     {
@@ -17,7 +19,7 @@ public class PredictiveTile : MonoBehaviour
     {
         yield return new WaitForSeconds(5.0f);
 
-        ShowMovementSquares(new GridVector(5, 5), 4);
+        ShowMovementSquares(new GridVector(5, 5), 3);
 
         yield return new WaitForSeconds(5.0f);
 
@@ -31,75 +33,76 @@ public class PredictiveTile : MonoBehaviour
             if (Grid.CheckAvailabilityOnGrid(new GridVector(CurrentPosition.x, CurrentPosition.z + i)))
             {
                 GameObject temp = Instantiate(PredictTile, new Vector3(CurrentPosition.x, 0, CurrentPosition.z + i), Quaternion.identity) as GameObject;
+                temp.transform.parent = PredictiveTileHolder.transform;
                 PredictiveTiles.Add(temp);
+                temp.gameObject.name = Count + "";
+                Count++;
             }
 
-            for (int j = 0; j < MovementCount; j++) // Left
+            for (int j = 1; j < MovementCount; j++) // Left
             {
                 if (Grid.CheckAvailabilityOnGrid(new GridVector(CurrentPosition.x - j,CurrentPosition.z + i)))
                 {
                     GameObject temp = Instantiate(PredictTile, new Vector3(CurrentPosition.x - j, 0, CurrentPosition.z + i), Quaternion.identity) as GameObject;
+                    temp.transform.parent = PredictiveTileHolder.transform;
                     PredictiveTiles.Add(temp);
+                    temp.gameObject.name = Count + "";
+                    Count++;
                 }
             }
 
-            for (int k = 0; k < MovementCount; k++) // Right
+            for (int k = 1; k < MovementCount; k++) // Right
             {
 
                 if (Grid.CheckAvailabilityOnGrid(new GridVector(CurrentPosition.x + k, CurrentPosition.z + i)))
                 {
                     GameObject temp = Instantiate(PredictTile, new Vector3(CurrentPosition.x + k, 0, CurrentPosition.z + i), Quaternion.identity) as GameObject;
+                    temp.transform.parent = PredictiveTileHolder.transform;
                     PredictiveTiles.Add(temp);
+                    temp.gameObject.name = Count + "";
+                    Count++;
                 }
             }
         }
 
-        for (int i = 0; i < MovementCount; i++) // South
+       
+        for (int i = 1; i < MovementCount; i++) // South
         {
+            
             if (Grid.CheckAvailabilityOnGrid(new GridVector(CurrentPosition.x, CurrentPosition.z - i)))
             {
                 GameObject temp = Instantiate(PredictTile, new Vector3(CurrentPosition.x, 0, CurrentPosition.z - i), Quaternion.identity) as GameObject;
+                temp.transform.parent = PredictiveTileHolder.transform;
                 PredictiveTiles.Add(temp);
+                temp.gameObject.name = Count + "";
+                Count++;
             }
-
             
-            for (int j = 0; j < MovementCount; j++) // Left
+            
+            for (int j = 1; j < MovementCount; j++) // Left
             {
                 if (Grid.CheckAvailabilityOnGrid(new GridVector(CurrentPosition.x - j, CurrentPosition.z - i)))
                 {
                     GameObject temp = Instantiate(PredictTile, new Vector3(CurrentPosition.x - j, 0, CurrentPosition.z - i), Quaternion.identity) as GameObject;
+                    temp.transform.parent = PredictiveTileHolder.transform;
                     PredictiveTiles.Add(temp);
+                    temp.gameObject.name = Count + "";
+                    Count++;
                 }
             }
 
-            for (int k = 0; k < MovementCount; k++) // Right
+            for (int k = 1; k < MovementCount; k++) // Right
             {
                 if (Grid.CheckAvailabilityOnGrid(new GridVector(CurrentPosition.x + k, CurrentPosition.z - i)))
                 {
                     GameObject temp = Instantiate(PredictTile, new Vector3(CurrentPosition.x + k, 0, CurrentPosition.z - i), Quaternion.identity) as GameObject;
+                    temp.transform.parent = PredictiveTileHolder.transform;
                     PredictiveTiles.Add(temp);
+                    temp.gameObject.name = Count + "";
+                    Count++;
                 }
             }
         }
-
-        for (int i = 0; i < MovementCount; i++) // East
-        {
-            if (Grid.CheckAvailabilityOnGrid(new GridVector(CurrentPosition.x + i, CurrentPosition.z)))
-            {
-                GameObject temp = Instantiate(PredictTile, new Vector3(CurrentPosition.x + i, 0, CurrentPosition.z), Quaternion.identity) as GameObject;
-                PredictiveTiles.Add(temp);
-            }
-        }
-
-        for (int i = 0; i < MovementCount; i++) // West
-        {
-            if (Grid.CheckAvailabilityOnGrid(new GridVector(CurrentPosition.x - i, CurrentPosition.z)))
-            {
-                GameObject temp = Instantiate(PredictTile, new Vector3(CurrentPosition.x - i, 0, CurrentPosition.z), Quaternion.identity) as GameObject;
-                PredictiveTiles.Add(temp);
-            }
-        }
-
     }
 
     private void CleanUpTiles()
