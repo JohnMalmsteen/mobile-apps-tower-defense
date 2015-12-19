@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public abstract class ClassType {
@@ -9,4 +10,5 @@ public abstract class ClassType {
 	public int willSave = 0;
 	public Armor armor = new Armor();
 	public abstract void levelUp();
+    public Sprite spriteImage;
 }

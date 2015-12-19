@@ -9,23 +9,7 @@ public class PredictiveTile : MonoBehaviour
 
     private List<GameObject> PredictiveTiles = new List<GameObject>();
     private int Count = 0;
-
-    void Start()
-    {
-        StartCoroutine(Waiting());
-    }
-
-    IEnumerator Waiting()
-    {
-        yield return new WaitForSeconds(5.0f);
-
-        ShowMovementSquares(new GridVector(5, 5), 3);
-
-        yield return new WaitForSeconds(5.0f);
-
-        CleanUpTiles();
-    }
-
+    
     void ShowMovementSquares(GridVector CurrentPosition,int MovementCount)
     {
         for (int i = 0; i < MovementCount; i++) // North

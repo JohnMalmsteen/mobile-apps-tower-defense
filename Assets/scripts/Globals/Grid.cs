@@ -9,9 +9,8 @@ public class Grid : MonoBehaviour
 
     void Start() // Adding Occupied spaces
     {
-        GlobalVars.OccupiedGrid.Add(new GridVector(2, 2));
-
-        GlobalVars.OccupiedGrid.Add(new GridVector(5, 3));
+        //GlobalVars.OccupiedGrid.Add(new GridVector(2, 2));
+        //GlobalVars.OccupiedGrid.Add(new GridVector(5, 3));
     }
 
     public static Color CheckAvailabilityOnGridColor(GridVector gridVector)

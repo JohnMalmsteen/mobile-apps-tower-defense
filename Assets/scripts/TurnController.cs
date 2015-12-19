@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class TurnController : MonoBehaviour {
-	public static List<attachableUnitDetails> playerUnits = new List<attachableUnitDetails>();
+    
+    public static List<attachableUnitDetails> playerUnits = new List<attachableUnitDetails>();
 	public static List<attachableUnitDetails> compUnits =  new List<attachableUnitDetails>();
 	public static attachableUnitDetails nebinsTower;
 	public static int turnCount = 0;
@@ -13,8 +14,11 @@ public class TurnController : MonoBehaviour {
 
 	public Queue<attachableUnitDetails> actionOrder =  new Queue<attachableUnitDetails>();
 
+    public UnitStore unitstore;
+
 	public void Start()
 	{
+        /*
 		nebinsTower = GameObject.Find("nebinsTower").AddComponent<attachableUnitDetails>();
 		nebinsTower.unit = new Unit();
 		nebinsTower.unit.BAB = 15;
@@ -24,14 +28,27 @@ public class TurnController : MonoBehaviour {
 		nebinsTower._class = new Sorcerer();
 		nebinsTower._class.level =  3;
 
-
 		List<attachableUnitDetails> combined = new List<attachableUnitDetails>(playerUnits);
 		combined.AddRange(compUnits);
 		combined.Sort();
 		combined.Add(nebinsTower);
 		actionOrder = new Queue<attachableUnitDetails>(combined);
+        */
+
+        // Calling the SetUpPhase
+
+        SetUpPhase();
 
 	}
+
+    public void SetUpPhase()
+    {
+        unitstore.display_UnitStoreMenu();
+        
+        // GameLoop is daisychained to take place after the startup phase
+        
+        //GameLoop(null);
+    }
 
 	public int GameLoop(Queue<attachableUnitDetails> actionQueue)
 	{

@@ -77,6 +77,7 @@ public class attachableUnitDetails : MonoBehaviour, IComparer {
 		else return 1;
 	}
 
+    /*
 	void Start()
 	{
 		unit = new Unit();
@@ -110,4 +111,5 @@ public class attachableUnitDetails : MonoBehaviour, IComparer {
 		owner = 0;
 		gold = 100;
 	}
+    */
 }

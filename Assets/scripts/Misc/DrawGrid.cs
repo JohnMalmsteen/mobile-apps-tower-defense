@@ -7,8 +7,8 @@ public class DrawGrid : MonoBehaviour
     private int GridSize;
     private List<Vector3> LinePoints;
 
-    private float GridHeight = 0.3f;
-    private float LineWidth = 0.5f;
+    private float GridHeight = 0.01f;
+    private float LineWidth = 0.2f;
     private string LineName = "Vectrosity Grid Line";
     private string VectrosityCamera = "VectrosityCamera";
 
@@ -36,7 +36,7 @@ public class DrawGrid : MonoBehaviour
         // Position Camera with the Grid
 
         GameObject mainCam = GameObject.FindGameObjectWithTag("MainCamera");
-        mainCam.transform.position = new Vector3(GlobalVars.GridSize / 2, GlobalVars.CameraHeight, GlobalVars.GridSize / 2);
+        mainCam.transform.position = new Vector3(GlobalVars.GridSize / 2, 11, GlobalVars.GridSize / 2);
 
     }// Start
 
