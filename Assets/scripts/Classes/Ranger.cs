@@ -4,6 +4,7 @@ using System.Collections;
 public class Ranger : ClassType {
 
 	public Unit favoredEnemy;
+    public static int RangerCost = 110;
 
 	public Ranger()
 	{
@@ -16,7 +17,9 @@ public class Ranger : ClassType {
 		armor.spellFailPenalty = 50;
 		armor.name = "Hide Armor";
 		favoredEnemy = new Human();
-	}
+
+        unitCost = RangerCost;
+    }
 	
 	public override void levelUp(){
 		if(level % 2 == 0)

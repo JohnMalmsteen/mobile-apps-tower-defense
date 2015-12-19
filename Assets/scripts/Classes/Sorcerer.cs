@@ -5,6 +5,7 @@ using System.Collections;
 public class Sorcerer : ClassType {
 
 	public int [] spellsPerDay =  new int[10];
+    public static int SorcererCost = 100;
 
 	public Sorcerer(){
 		spellsPerDay[0] = 5;
@@ -15,6 +16,8 @@ public class Sorcerer : ClassType {
 		}
 		babType = "poor";
 		armor.name = "Sorcerers Robes";
+
+        unitCost = SorcererCost;
 	}
 
 	public override void levelUp()

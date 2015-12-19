@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Fighter : ClassType {
 
+    public static int FighterCost = 120;
+
 	public Fighter()
 	{
 		refSave = 2;
@@ -13,7 +15,9 @@ public class Fighter : ClassType {
 		armor.armorCheckPenality = 1;
 		armor.spellFailPenalty = 50;
 		armor.name = "Chain Mail";
-	}
+
+        unitCost = FighterCost;
+    }
 
 	public override void levelUp(){
 		if(level % 2 == 0)

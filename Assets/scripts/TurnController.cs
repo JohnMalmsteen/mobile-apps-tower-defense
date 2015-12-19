@@ -4,15 +4,17 @@ using System.Collections.Generic;
 
 public class TurnController : MonoBehaviour {
     
-    public static List<attachableUnitDetails> playerUnits = new List<attachableUnitDetails>();
-	public static List<attachableUnitDetails> compUnits =  new List<attachableUnitDetails>();
-	public static attachableUnitDetails nebinsTower;
+    public static List<GameObject> playerUnits = new List<GameObject>();
+	public static List<GameObject> compUnits =  new List<GameObject>();
+
+	public static GameObject nebinsTower;
 	public static int turnCount = 0;
 	public static bool levelOver = false;
 	public static bool playerWin = false;
-	public static attachableUnitDetails currentTurnUnit;
 
-	public Queue<attachableUnitDetails> actionOrder =  new Queue<attachableUnitDetails>();
+	public static GameObject currentTurnUnit;
+
+	public Queue<GameObject> actionOrder =  new Queue<GameObject>();
 
     public UnitStore unitstore;
 
@@ -50,7 +52,7 @@ public class TurnController : MonoBehaviour {
         //GameLoop(null);
     }
 
-	public int GameLoop(Queue<attachableUnitDetails> actionQueue)
+	public int GameLoop(Queue<GameObject> actionQueue)
 	{
 		while(!levelOver)
 		{
@@ -69,7 +71,7 @@ public class TurnController : MonoBehaviour {
 		return 0;
 	}
 
-	public int Turn(attachableUnitDetails currentUnit)
+	public int Turn(GameObject currentUnit)
 	{
 		/*
 		 * Move code goes here
