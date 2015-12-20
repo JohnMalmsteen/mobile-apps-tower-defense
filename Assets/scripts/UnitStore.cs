@@ -25,6 +25,10 @@ public class UnitStore : MonoBehaviour
     public Sprite dwarf_ranger;
     public Sprite dwarf_sorcerer;
 
+    public GameObject model_dwarf_fighter;
+    public GameObject model_dwarf_ranger;
+    public GameObject model_dwarf_sorcerer;
+
     public Button btnBuyUnit;
     public Button placeUnits;
 
@@ -107,6 +111,7 @@ public class UnitStore : MonoBehaviour
             {
                 deets._class = new Fighter();
                 deets._class.spriteImage = dwarf_fighter;
+                deets._class.model = model_dwarf_fighter;
                 deets._class.level = 3;
             }
 
@@ -114,6 +119,7 @@ public class UnitStore : MonoBehaviour
             {
                 deets._class = new Ranger();
                 deets._class.spriteImage = dwarf_ranger;
+                deets._class.model = model_dwarf_ranger;
                 deets._class.level = 3;
             }
 
@@ -121,6 +127,7 @@ public class UnitStore : MonoBehaviour
             {
                 deets._class = new Sorcerer();
                 deets._class.spriteImage = dwarf_sorcerer;
+                deets._class.model = model_dwarf_sorcerer;
                 deets._class.level = 3;
             }
 
@@ -163,6 +170,9 @@ public class UnitStore : MonoBehaviour
         {
             images.GetComponent<Image>().sprite = defaultImage;
         }
+
+        GlobalVars.GoldCount = GlobalVars.StartGold;
+        GoldText.text = "" + GlobalVars.GoldCount;
 
         btnBuyUnit.interactable = true;
         placeUnits.interactable = false;

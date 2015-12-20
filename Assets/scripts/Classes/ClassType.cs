@@ -11,5 +11,9 @@ public abstract class ClassType {
     public int unitCost = 100;
 	public Armor armor = new Armor();
 	public abstract void levelUp();
+    public GameObject model;
+    public GameObject unitBoardModel;
+    public GameObject unitButton;
     public Sprite spriteImage;
+    public Vector3 gridPosition;
 }

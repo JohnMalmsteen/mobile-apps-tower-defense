@@ -1,0 +1,85 @@
+fileFormatVersion: 2
+guid: a107453951ad44c4d9f91cc1a0be4f95
+timeCreated: 1449533500
+licenseType: Free
+SubstanceImporter:
+  serializedVersion: 5
+  materialInstances:
+  - serializedVersion: 16
+    name: ceiling_wood_cartoony_clean
+    prototypeName: ceiling_wood_cartoony_clean
+    shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
+    shaderKeywords: 
+    renderQueue: -1
+    lightmapFlags: 5
+    inputs: []
+    materialInformation:
+      serializedVersion: 5
+      offset: {x: 0, y: 0}
+      scale: {x: 1, y: 1}
+      generateMipmaps: 1
+      generateAllOutputs: 0
+      animationUpdateRate: 0
+    materialProperties:
+      serializedVersion: 2
+      texEnvs: {}
+      floats: {}
+      colors: {}
+    textureParameters:
+    - name: ceiling_wood_cartoony_clean_diffuse
+      alphaSource: 6
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: ceiling_wood_cartoony_clean_normal
+      alphaSource: 0
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: ceiling_wood_cartoony_clean_specular
+      alphaSource: 7
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: ceiling_wood_cartoony_clean_ambient_occlusion
+      alphaSource: 0
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: ceiling_wood_cartoony_clean_height
+      alphaSource: 0
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    textureAssignments:
+    - shaderProp:
+        name: _MainTex
+      material: {instanceID: 0}
+      baseUID: 3728919108
+    - shaderProp:
+        name: _BumpMap
+      material: {instanceID: 0}
+      baseUID: 3510518513
+    - shaderProp:
+        name: _ParallaxMap
+      material: {instanceID: 0}
+      baseUID: 3510518652
+    - shaderProp:
+        name: _OcclusionMap
+      material: {instanceID: 0}
+      baseUID: 3510518595
+    - shaderProp:
+        name: _SpecGlossMap
+      material: {instanceID: 0}
+      baseUID: 3728919110
+    buildTargetSettings:
+    - serializedVersion: 2
+      buildTarget: 
+      textureWidth: 512
+      textureHeight: 512
+      textureFormat: 0
+      loadingBehavior: 1
+  deletedPrototypes: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

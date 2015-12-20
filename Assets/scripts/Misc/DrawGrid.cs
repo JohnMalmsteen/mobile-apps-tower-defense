@@ -35,8 +35,8 @@ public class DrawGrid : MonoBehaviour
         GameObject.Find(LineName).transform.position = new Vector3(0.5f, GridHeight, 0.5f);
         // Position Camera with the Grid
 
-        GameObject mainCam = GameObject.FindGameObjectWithTag("MainCamera");
-        mainCam.transform.position = new Vector3(GlobalVars.GridSize / 2, 11, GlobalVars.GridSize / 2);
+        //GameObject mainCam = GameObject.FindGameObjectWithTag("MainCamera");
+        //mainCam.transform.position = new Vector3(GlobalVars.GridSize / 2, 11, GlobalVars.GridSize / 2);
 
     }// Start
 
