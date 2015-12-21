@@ -7,6 +7,7 @@ public class PlaceUnits : MonoBehaviour
     public GameObject btnCross;
     public GameObject unitPlacePanel;
     public MouseTile mousetile;
+    public Text statusText;
 
     public void fillUnitBar()
     {
@@ -46,6 +47,7 @@ public class PlaceUnits : MonoBehaviour
 
     public void donePlacing()
     {
+        statusText.text = "Battle";
         unitPlacePanel.SetActive(false);
     }
 	

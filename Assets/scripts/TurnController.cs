@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class TurnController : MonoBehaviour {
     
@@ -17,6 +18,7 @@ public class TurnController : MonoBehaviour {
 	public Queue<GameObject> actionOrder =  new Queue<GameObject>();
 
     public UnitStore unitstore;
+    public Text statusText;
 
 	public void Start()
 	{
@@ -46,10 +48,6 @@ public class TurnController : MonoBehaviour {
     public void SetUpPhase()
     {
         unitstore.display_UnitStoreMenu();
-        
-        // GameLoop is daisychained to take place after the startup phase
-        
-        //GameLoop(null);
     }
 
 	public int GameLoop(Queue<GameObject> actionQueue)
