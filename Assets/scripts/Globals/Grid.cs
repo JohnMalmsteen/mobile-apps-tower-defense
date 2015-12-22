@@ -21,7 +21,7 @@ public class Grid : MonoBehaviour
 
     public GridVector CheckforHuman(GridVector g)
     {
-        print("Count: " + GlobalVars.OccupiedGrid.Count);
+        //print("Count: " + GlobalVars.OccupiedGrid.Count);
 
         foreach (GridVector grid in GlobalVars.OccupiedGrid)
         {
@@ -42,11 +42,8 @@ public class Grid : MonoBehaviour
                         //print("This is it: " + grid);
 
                     }
-
                 }
-
             }
-
 
             /*
             if ((g.x + 1) == grid.x && g.z == grid.z)

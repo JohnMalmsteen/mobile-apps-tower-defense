@@ -66,6 +66,30 @@ public class GlobalVars
 
         return true;
     }
+
+    public static void Remove(GridVector gv)
+    {
+        int count = 0;
+        int pos = 0;
+        bool found = false;
+
+        foreach (GridVector g in OccupiedGrid)
+        {
+            if(g.x == gv.x && g.z == gv.z)
+            {
+                pos = count;
+                found = true;
+            }
+
+            count++;
+        }
+
+        if(found)
+        {
+            OccupiedGrid.RemoveAt(pos);
+        }
+    }
+
     /*
     public static bool GetOccuppiedGridSpace(int x, int z)
     {

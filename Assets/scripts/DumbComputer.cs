@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class DumbComputer : MonoBehaviour
 {
@@ -59,6 +60,15 @@ public class DumbComputer : MonoBehaviour
         {
             print("In attack range");
 
+            GameObject go = turnController.GetUnitAt(close);
+
+            print("Health Before: " + go.GetComponent<attachableUnitDetails>().unit.health);
+
+            go.GetComponent<attachableUnitDetails>().unit.takeDmg(enemyCurr.GetComponent<attachableUnitDetails>().unit.compAtk());
+
+            print("Health After: " + go.GetComponent<attachableUnitDetails>().unit.health);
+
+            CheckPlayerDead(go);
 
             attackRange = true;
         }
@@ -135,12 +145,49 @@ public class DumbComputer : MonoBehaviour
 
             //print("Final position: " + finalPosition);
 
-        }//
-        else
-        {
-            print("Attacking");
         }
 
+    }
+
+    public void CheckPlayerDead(GameObject player)
+    {
+        int k = 0;
+        bool found = false;
+
+        if (player.gameObject.GetComponent<attachableUnitDetails>().unit.health < 0)
+        {
+            foreach (KeyValuePair<int, GameObject> g in TurnController.initiative)
+            {
+                if (g.Value == player)
+                {
+                    k = g.Key;
+                    found = true;
+                }
+            }
+
+            if (found)
+            {
+                print("Removed Player");
+
+                TurnController.initiative.Remove(k);
+            }
+
+
+            Destroy(player.gameObject.GetComponent<attachableUnitDetails>()._class.unitBoardModel);
+            Destroy(player.gameObject.GetComponent<attachableUnitDetails>()._class.unitButton);
+
+        }
+
+
+
+        /*
+        if (player.gameObject.GetComponent<attachableUnitDetails>().unit.isDead())
+        {
+            print("Destroying Dead Player:");
+
+            Destroy(player);
+        }
+        */
     }
 
     public int CostDistance(GameObject enemy,GameObject player)

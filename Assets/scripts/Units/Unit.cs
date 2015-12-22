@@ -19,13 +19,19 @@ public class Unit {
 	public int inititiative;
 	public int movementRange;
 
+    public int pAtk;
+    public int cAtk;
+
 	public Unit(){
 		hitDie = 8;
 		str = GetAbilityScore ();
 		dex = GetAbilityScore ();
 		con = GetAbilityScore ();
-		health = hitDie + con;
-		maxHealth = health;
+        //health = hitDie + con;
+
+        health = (int)UnityEngine.Random.Range(25, 35);
+
+        maxHealth = health;
 		position [0] = 0;
 		position [1] = 0;
 		armorClass = 10 + dex;
@@ -36,7 +42,32 @@ public class Unit {
 		inititiative = (int)UnityEngine.Random.Range(1, 21) + dex;
 	}
 
-	public virtual int UnarmedAttack(Unit target){
+    public int playerAtk()
+    {
+        return Convert.ToInt32(UnityEngine.Random.Range(3, 10));
+    }
+
+    public int compAtk()
+    {
+        return Convert.ToInt32(UnityEngine.Random.Range(1, 5));
+    }
+
+    public void takeDmg(int x)
+    {
+        health -= x;
+    }
+
+    public bool isDead()
+    {
+        if(health < 0 )
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public virtual int UnarmedAttack(Unit target){
 		int damage = (int)UnityEngine.Random.Range (1, 3);
 		damage += str;
 
