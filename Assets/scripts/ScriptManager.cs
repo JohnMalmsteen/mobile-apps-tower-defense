@@ -11,4 +11,5 @@ public class ScriptManager : MonoBehaviour
     public DumbComputer dumbComputer;
     public SpritesModels spriteModels;
     public PredictiveTile predictiveTile;
+    public Grid grid;
 }

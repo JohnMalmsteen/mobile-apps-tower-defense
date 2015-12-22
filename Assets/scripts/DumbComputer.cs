@@ -9,6 +9,7 @@ public class DumbComputer : MonoBehaviour
     ScriptManager scriptManager;
     SpritesModels spriteModels;
     TurnController turnController;
+    Grid grid;
 
     int x, z;
 
@@ -17,6 +18,7 @@ public class DumbComputer : MonoBehaviour
         scriptManager = GameObject.Find("ScriptManager").GetComponent<ScriptManager>();
         spriteModels = scriptManager.spriteModels;
         turnController = scriptManager.turnController;
+        grid = scriptManager.grid;
     }
 
     public void FindAndAttack(GameObject enemyCurr)
@@ -51,20 +53,19 @@ public class DumbComputer : MonoBehaviour
 
         bool attackRange = false;
 
-        GridVector close = Grid.CheckforHuman(e);
-        
-        /*
+        GridVector close = grid.CheckforHuman(e);
+
         if (close != null)
         {
-            print("close: " + close.x + " " + close.z);
             print("In attack range");
+
+
             attackRange = true;
         }
-        */
-
+        
         if(!attackRange)
         {
-            print("Computer Compare: " + e.z + " " + p.z);
+            //print("Computer Compare: " + e.z + " " + p.z);
 
             if (e.z < p.z)
             {
@@ -72,7 +73,7 @@ public class DumbComputer : MonoBehaviour
                 
                 if (GlobalVars.CheckGridSpace(gv.x, gv.z))
                 {
-                    print("1");
+                    //print("1");
 
                     finalPosition = new Vector3(e.x, 0, e.z + 1);
                     enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position = finalPosition;
@@ -87,7 +88,7 @@ public class DumbComputer : MonoBehaviour
 
                 if (GlobalVars.CheckGridSpace(gv.x, gv.z))
                 {
-                    print("2");
+                    //print("2");
 
                     finalPosition = new Vector3(e.x, 0, e.z - 1);
                     enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position = finalPosition;
@@ -104,7 +105,7 @@ public class DumbComputer : MonoBehaviour
 
                     if (GlobalVars.CheckGridSpace(gv.x, gv.z))
                     {
-                        print("3");
+                        //print("3");
 
                         finalPosition = new Vector3((e.x - 1), 0, e.z);
                         enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position = finalPosition;
@@ -120,7 +121,7 @@ public class DumbComputer : MonoBehaviour
 
                     if (GlobalVars.CheckGridSpace(gv.x, gv.z))
                     {
-                        print("4");
+                        //print("4");
 
                         finalPosition = new Vector3((e.x + 1), 0, e.z);
                         enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position = finalPosition;                        
@@ -244,7 +245,7 @@ public class DumbComputer : MonoBehaviour
             GlobalVars.ComputerPlacedCount++;
         }
 
-        print("GlobalVars.OccupiedGrid: " + GlobalVars.OccupiedGrid.Count);
+        //print("GlobalVars.OccupiedGrid: " + GlobalVars.OccupiedGrid.Count);
     }
 
 

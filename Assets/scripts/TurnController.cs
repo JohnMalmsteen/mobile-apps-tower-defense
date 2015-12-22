@@ -106,7 +106,7 @@ public class TurnController : MonoBehaviour
             }
             else // IF COMPUTER
             {
-                print("Trying Computer");
+                //print("Trying Computer");
 
                 currentTurnUnit = GetInitUnit(unitTurn);
 
@@ -156,6 +156,14 @@ public class TurnController : MonoBehaviour
     public GameObject GetUnitAt(GridVector gridVector)
     {
         foreach (GameObject go in compUnits)
+        {
+            if (go.GetComponent<attachableUnitDetails>()._class.gridVector.x == gridVector.x && go.GetComponent<attachableUnitDetails>()._class.gridVector.z == gridVector.z)
+            {
+                return go;
+            }
+        }
+
+        foreach (GameObject go in playerUnits)
         {
             if (go.GetComponent<attachableUnitDetails>()._class.gridVector.x == gridVector.x && go.GetComponent<attachableUnitDetails>()._class.gridVector.z == gridVector.z)
             {
