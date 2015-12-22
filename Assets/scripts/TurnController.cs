@@ -80,10 +80,16 @@ public class TurnController : MonoBehaviour
 
     IEnumerator GameLoop()
     {
-        print("Game Loop");
-
         while(GlobalVars.PlayerAliveCount > 0 && GlobalVars.CompAliveCount > 0)
         {
+            if (unitTurn > initiative.Count - 1)
+            {
+                print("0");
+                unitTurn = 0;
+            }
+
+            //print("Problem: " + " unitTurn: " + unitTurn + " : " + GetInitUnit(unitTurn).gameObject.GetComponent<attachableUnitDetails>()._class.unitBoardModel);
+
             activeTile.transform.position = GetInitUnit(unitTurn).gameObject.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position;
 
             ButtonUpdate(GetInitUnit(unitTurn),unitTurn);
@@ -94,38 +100,26 @@ public class TurnController : MonoBehaviour
 
                 currentTurnUnit = GetInitUnit(unitTurn);
 
-                print("Trying CoRoutine");
+                //print("Trying Human");
 
                 yield return StartCoroutine(PlayerTurn());
 
             }
             else // IF COMPUTER
             {
+                print("Trying Computer");
+
                 currentTurnUnit = GetInitUnit(unitTurn);
 
-                print("Trying Computer CoRoutine");
+                dumbComputer.FindAndAttack(currentTurnUnit);
 
-                yield return StartCoroutine(ComputerTurn());
+                unitTurn++;
             }
-                        
+
             yield return new WaitForSeconds(1);
-
-            if(unitTurn >= initiative.Count)
-            {
-                unitTurn = 0;
-            }
-
+            
         }
 
-    }
-
-    IEnumerator ComputerTurn()
-    {
-        print("Checking Computer");
-
-        dumbComputer.FindAndAttack(currentTurnUnit);
-
-        yield return new WaitForSeconds(1);
     }
 
     IEnumerator PlayerTurn()
@@ -164,6 +158,8 @@ public class TurnController : MonoBehaviour
     {
         int count = 0;
 
+        //print("initiative: " + initiative.Count + " : " + turn);
+
         foreach(KeyValuePair<int,GameObject> go in initiative)
         {
             if (count == turn)
@@ -173,6 +169,8 @@ public class TurnController : MonoBehaviour
 
             ++count;
         }
+
+        //print("Nope");
 
         return null;
     }

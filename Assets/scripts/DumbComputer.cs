@@ -42,26 +42,100 @@ public class DumbComputer : MonoBehaviour
         GridVector e = enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector;
         GridVector p = currentEnemy.GetComponent<attachableUnitDetails>()._class.gridVector;
 
-        Vector3 finalPosition;
+        Vector3 finalPosition = Vector3.zero;
+        GridVector gv;
 
         ////////////////////////////////////////////////////////////////////////
         /// MAKE COMPUTER MOVE
         //////////////////////////////////////////////////////////////////////
 
-        if (!(e.x == p.x))
+        bool attackRange = false;
+        bool choice = false;
+        
+        if((e.x - 1) == p.x && (e.z - 1) == p.z)
         {
-            if (e.x < p.x)
+            print("In attack range");
+            attackRange = true;
+        }
+
+        if(!attackRange)
+        {
+            if (e.z > p.z)
             {
-                enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.rotation = q;
+                gv = new GridVector(e.x, e.z + 1);
 
+                print("1");
 
+                if (GlobalVars.CheckGridSpace(gv.x, gv.z))
+                {
+                    finalPosition = new Vector3(e.x, 0, e.z + 1);
+                    enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position = finalPosition;
+                    
+                    GlobalVars.UpdateOccupied(enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector, gv);
+
+                    choice = true;
+                }
             }
             else
             {
-                enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.rotation = q2;
+                print("2");
 
+                gv = new GridVector(e.x, e.z - 1);
+
+                if (GlobalVars.CheckGridSpace(gv.x, gv.z))
+                {
+                    finalPosition = new Vector3(e.x, 0, e.z - 1);
+
+                    enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position = finalPosition;
+                    
+                    GlobalVars.UpdateOccupied(enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector, gv);
+
+                    choice = true;
+                }
+            }
+
+            if (!choice)
+            {
+
+                if (e.x > p.x)
+                {
+                    gv = new GridVector(e.z - 1, e.z);
+                    print("3");
+
+                    if (GlobalVars.CheckGridSpace(gv.x, gv.z))
+                    {
+
+                        finalPosition = new Vector3((e.x - 1), 0, e.z);
+                        enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position = finalPosition;
+                    }
+
+                    //GlobalVars.UpdateOccupied(enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector, gv);
+
+                }
+                else
+                {
+                    print("4");
+
+                    gv = new GridVector(e.z + 1, e.z);
+
+                    if (GlobalVars.CheckGridSpace(gv.x, gv.z))
+                    {
+
+                        finalPosition = new Vector3((e.x + 1), 0, e.z);
+                        enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position = finalPosition;
+                    }
+
+                    //GlobalVars.UpdateOccupied(enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector, gv);
+                }
 
             }
+
+            print("Final position: " + finalPosition);
+
+        }//
+        else
+        {
+            print("Attacking");
         }
 
     }
@@ -72,8 +146,6 @@ public class DumbComputer : MonoBehaviour
 
         GridVector enV = enemy.GetComponent<attachableUnitDetails>()._class.gridVector;
         GridVector pV = enemy.GetComponent<attachableUnitDetails>()._class.gridVector;
-
-        print("Env: " + enV + " : PV: " + pV);
 
         cost = Mathf.Abs(Mathf.Abs(enV.x) - Mathf.Abs(pV.x));
 

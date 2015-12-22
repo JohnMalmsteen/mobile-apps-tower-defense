@@ -23,13 +23,27 @@ public class GlobalVars
     
     public static void UpdateOccupied(GridVector oldGv, GridVector newGv)
     {
+        GridVector g = null;
+        int count = 0;
+        bool found = false;
+
         foreach (GridVector gv in OccupiedGrid)
         {
             if (oldGv.x == gv.x && oldGv.z == gv.z)
-                OccupiedGrid.Remove(gv);
+            {
+                Debug.Log("Found");
+                found = true;
+                count++;
+            }
         }
 
-        OccupiedGrid.Add(newGv);
+        if (found)
+        {
+            OccupiedGrid.RemoveAt(count);
+            OccupiedGrid.Add(newGv);
+        }
+
+        //Debug.Log("Count: " + OccupiedGrid.Count);
     }
 
     public static bool CheckGridSpace(int x, int z)
