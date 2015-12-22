@@ -101,6 +101,10 @@ public class TurnController : MonoBehaviour
             }
             else // IF COMPUTER
             {
+                currentTurnUnit = GetInitUnit(unitTurn);
+
+                print("Trying Computer CoRoutine");
+
                 yield return StartCoroutine(ComputerTurn());
             }
                         
@@ -118,6 +122,8 @@ public class TurnController : MonoBehaviour
     IEnumerator ComputerTurn()
     {
         print("Checking Computer");
+
+        dumbComputer.FindAndAttack(currentTurnUnit);
 
         yield return new WaitForSeconds(1);
     }

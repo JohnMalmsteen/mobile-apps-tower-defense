@@ -8,6 +8,7 @@ public class DumbComputer : MonoBehaviour
 
     ScriptManager scriptManager;
     SpritesModels spriteModels;
+    TurnController turnController;
 
     int x, z;
 
@@ -15,6 +16,70 @@ public class DumbComputer : MonoBehaviour
     {
         scriptManager = GameObject.Find("ScriptManager").GetComponent<ScriptManager>();
         spriteModels = scriptManager.spriteModels;
+        turnController = scriptManager.turnController;
+    }
+
+    public void FindAndAttack(GameObject enemyCurr)
+    {
+        GameObject currentEnemy = enemyCurr;
+        GameObject closestPlayerUnit;
+        int closestCost = 100;
+
+        Quaternion q = new Quaternion(0, 0, 0, 0);
+        Quaternion q2 = new Quaternion(0, 180.0f, 0, 0);
+
+        foreach (GameObject go in TurnController.playerUnits)
+        {
+            int x = CostDistance(currentEnemy, go);
+
+            if (x < closestCost)
+            {
+                closestPlayerUnit = go;
+                closestCost = x;
+            }
+        }
+
+        GridVector e = enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector;
+        GridVector p = currentEnemy.GetComponent<attachableUnitDetails>()._class.gridVector;
+
+        Vector3 finalPosition;
+
+        ////////////////////////////////////////////////////////////////////////
+        /// MAKE COMPUTER MOVE
+        //////////////////////////////////////////////////////////////////////
+
+        if (!(e.x == p.x))
+        {
+            if (e.x < p.x)
+            {
+                enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.rotation = q;
+
+
+            }
+            else
+            {
+                enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.rotation = q2;
+
+
+            }
+        }
+
+    }
+
+    public int CostDistance(GameObject enemy,GameObject player)
+    {
+        int cost = 0;
+
+        GridVector enV = enemy.GetComponent<attachableUnitDetails>()._class.gridVector;
+        GridVector pV = enemy.GetComponent<attachableUnitDetails>()._class.gridVector;
+
+        print("Env: " + enV + " : PV: " + pV);
+
+        cost = Mathf.Abs(Mathf.Abs(enV.x) - Mathf.Abs(pV.x));
+
+        cost += Mathf.Abs(Mathf.Abs(enV.z) - Mathf.Abs(pV.z));
+
+        return cost;
     }
 
     public void PlaceUnits()
