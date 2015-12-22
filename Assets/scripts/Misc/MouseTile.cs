@@ -7,6 +7,8 @@ public class MouseTile : MonoBehaviour
 {
     ScriptManager scriptManager;
     TurnController turnController;
+    DumbComputer dumbComputer;
+    guiController guiController;
 
     public PlaceUnits placeunits;
 
@@ -22,6 +24,8 @@ public class MouseTile : MonoBehaviour
     {
         scriptManager = GameObject.Find("ScriptManager").GetComponent<ScriptManager>();
         turnController = scriptManager.turnController;
+        dumbComputer = scriptManager.dumbComputer;
+        guiController = scriptManager.guiController;
 
         //currentTurnUnit
     }
@@ -168,6 +172,20 @@ public class MouseTile : MonoBehaviour
                     else
                     {
                         // Try attack
+
+                        GameObject go = turnController.GetUnitAt(new GridVector(xi, zi));
+
+                        int difference = go.GetComponent<attachableUnitDetails>().unit.health;
+
+                        go.GetComponent<attachableUnitDetails>().unit.takeDmg(turnController.currentTurnUnit.GetComponent<attachableUnitDetails>().unit.playerAtk());
+
+                        difference -= go.GetComponent<attachableUnitDetails>().unit.health;
+
+                        guiController.statusText.text = "Attacked the computer for: " + difference;
+
+                        dumbComputer.CheckComputerDead(go);
+
+                        turnController.unitTurn++;
                     }
                 }
 

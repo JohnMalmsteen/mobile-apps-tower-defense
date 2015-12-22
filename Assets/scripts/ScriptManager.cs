@@ -12,4 +12,5 @@ public class ScriptManager : MonoBehaviour
     public SpritesModels spriteModels;
     public PredictiveTile predictiveTile;
     public Grid grid;
+    public Cereal cereal;
 }

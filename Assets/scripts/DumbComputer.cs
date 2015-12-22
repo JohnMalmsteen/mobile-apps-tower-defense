@@ -10,6 +10,7 @@ public class DumbComputer : MonoBehaviour
     ScriptManager scriptManager;
     SpritesModels spriteModels;
     TurnController turnController;
+    guiController guiController;
     Grid grid;
 
     int x, z;
@@ -19,6 +20,8 @@ public class DumbComputer : MonoBehaviour
         scriptManager = GameObject.Find("ScriptManager").GetComponent<ScriptManager>();
         spriteModels = scriptManager.spriteModels;
         turnController = scriptManager.turnController;
+        guiController = scriptManager.guiController;
+
         grid = scriptManager.grid;
     }
 
@@ -59,14 +62,20 @@ public class DumbComputer : MonoBehaviour
         if (close != null)
         {
             print("In attack range");
-
+            
             GameObject go = turnController.GetUnitAt(close);
+            
+            int difference = go.GetComponent<attachableUnitDetails>().unit.health;
 
             print("Health Before: " + go.GetComponent<attachableUnitDetails>().unit.health);
 
             go.GetComponent<attachableUnitDetails>().unit.takeDmg(enemyCurr.GetComponent<attachableUnitDetails>().unit.compAtk());
 
             print("Health After: " + go.GetComponent<attachableUnitDetails>().unit.health);
+
+            difference -= go.GetComponent<attachableUnitDetails>().unit.health;
+
+            guiController.statusText.text = "Attacked by computer for: " + difference;
 
             CheckPlayerDead(go);
 
@@ -176,9 +185,68 @@ public class DumbComputer : MonoBehaviour
             Destroy(player.gameObject.GetComponent<attachableUnitDetails>()._class.unitBoardModel);
             Destroy(player.gameObject.GetComponent<attachableUnitDetails>()._class.unitButton);
 
+            GlobalVars.PlayerAliveCount--;
         }
 
+        if(GlobalVars.PlayerAliveCount < 0)
+        {
+            Application.LoadLevel("LoseScreen");
+        }
 
+        if (GlobalVars.CompAliveCount < 0)
+        {
+            Application.LoadLevel("WinScreen");
+        }
+
+        /*
+        if (player.gameObject.GetComponent<attachableUnitDetails>().unit.isDead())
+        {
+            print("Destroying Dead Player:");
+
+            Destroy(player);
+        }
+        */
+    }
+
+    public void CheckComputerDead(GameObject player)
+    {
+        int k = 0;
+        bool found = false;
+
+        if (player.gameObject.GetComponent<attachableUnitDetails>().unit.health < 0)
+        {
+            foreach (KeyValuePair<int, GameObject> g in TurnController.initiative)
+            {
+                if (g.Value == player)
+                {
+                    k = g.Key;
+                    found = true;
+                }
+            }
+
+            if (found)
+            {
+                print("Removed Player");
+
+                TurnController.initiative.Remove(k);
+            }
+
+
+            Destroy(player.gameObject.GetComponent<attachableUnitDetails>()._class.unitBoardModel);
+            Destroy(player.gameObject.GetComponent<attachableUnitDetails>()._class.unitButton);
+
+            GlobalVars.CompAliveCount--;
+        }
+
+        if (GlobalVars.PlayerAliveCount < 0)
+        {
+            Application.LoadLevel("LoseScreen");
+        }
+
+        if (GlobalVars.CompAliveCount < 0)
+        {
+            Application.LoadLevel("WinScreen");
+        }
 
         /*
         if (player.gameObject.GetComponent<attachableUnitDetails>().unit.isDead())
