@@ -20,23 +20,21 @@ public class UnitStore : MonoBehaviour
     public Sprite defaultImage;
 
     public ToggleGroup myToggleGroup;
-    
-    public Sprite dwarf_fighter;
-    public Sprite dwarf_ranger;
-    public Sprite dwarf_sorcerer;
-
-    public GameObject model_dwarf_fighter;
-    public GameObject model_dwarf_ranger;
-    public GameObject model_dwarf_sorcerer;
 
     public Button btnBuyUnit;
     public Button placeUnits;
+
+    ScriptManager scriptManager;
+    SpritesModels spriteModels;
 
     public void Start()
     {
         WarCostText.text = "" + Fighter.FighterCost;
         RangeCostText.text = "" + Ranger.RangerCost;
         MageCostText.text = "" + Sorcerer.SorcererCost;
+
+        scriptManager = GameObject.Find("ScriptManager").GetComponent<ScriptManager>();
+        spriteModels = scriptManager.spriteModels;
     }       
 
     public bool display_UnitStoreMenu()
@@ -110,24 +108,24 @@ public class UnitStore : MonoBehaviour
             if (classType == "toggle_warrior")
             {
                 deets._class = new Fighter();
-                deets._class.spriteImage = dwarf_fighter;
-                deets._class.model = model_dwarf_fighter;
+                deets._class.spriteImage = spriteModels.dwarf_fighter;
+                deets._class.model = spriteModels.model_dwarf_fighter;
                 deets._class.level = 3;
             }
 
             if (classType == "toggle_ranger")
             {
                 deets._class = new Ranger();
-                deets._class.spriteImage = dwarf_ranger;
-                deets._class.model = model_dwarf_ranger;
+                deets._class.spriteImage = spriteModels.dwarf_ranger;
+                deets._class.model = spriteModels.model_dwarf_ranger;
                 deets._class.level = 3;
             }
 
             if (classType == "toggle_mage")
             {
                 deets._class = new Sorcerer();
-                deets._class.spriteImage = dwarf_sorcerer;
-                deets._class.model = model_dwarf_sorcerer;
+                deets._class.spriteImage = spriteModels.dwarf_sorcerer;
+                deets._class.model = spriteModels.model_dwarf_sorcerer;
                 deets._class.level = 3;
             }
 

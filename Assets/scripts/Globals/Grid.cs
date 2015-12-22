@@ -13,7 +13,7 @@ public class Grid : MonoBehaviour
         //GlobalVars.OccupiedGrid.Add(new GridVector(5, 3));
     }
 
-    public static Color CheckAvailabilityOnGridColor(GridVector gridVector)
+    public static Color CheckAvailabilityOnGridColor(GridVector gridVector,bool mode)
     {
         foreach (GridVector gv in GlobalVars.OccupiedGrid)
         {            
@@ -23,6 +23,14 @@ public class Grid : MonoBehaviour
             }
 
         }//foreach
+                
+        if (mode)
+        {
+            if (GlobalVars.CheckGridHalf(gridVector.z))
+                return RIGHT;
+            else
+                return WRONG;
+        }
 
         return RIGHT;
 

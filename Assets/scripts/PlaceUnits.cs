@@ -4,14 +4,23 @@ using System.Collections;
 
 public class PlaceUnits : MonoBehaviour
 {
-    public GameObject btnCross;
-    public GameObject unitPlacePanel;
-    public MouseTile mousetile;
-    public Text statusText;
+    ScriptManager scriptManager;
+    guiController guiController;
+    MouseTile mouseTile;
+    TurnController turnController;
+
+    public void Start()
+    {
+        scriptManager = GameObject.Find("ScriptManager").GetComponent<ScriptManager>();
+        guiController = scriptManager.guiController;
+        turnController = scriptManager.turnController;
+        mouseTile = scriptManager.mouseTile;
+    }
 
     public void fillUnitBar()
     {
-        btnCross.SetActive(true);
+        guiController.btnCross.SetActive(true);
+
         GlobalVars.PLACE_MODE = true;
 
         foreach (GameObject go in TurnController.playerUnits)
@@ -21,7 +30,7 @@ public class PlaceUnits : MonoBehaviour
             ImageButton.AddComponent<Image>().sprite = go.gameObject.GetComponent<attachableUnitDetails>()._class.spriteImage;
             ImageButton.AddComponent<Button>();
             ImageButton.AddComponent<Outline>().effectDistance = new Vector2(-3,3);
-            ImageButton.transform.SetParent(unitPlacePanel.transform);
+            ImageButton.transform.SetParent(guiController.unitPlacePanel.transform);
 
             go.gameObject.GetComponent<attachableUnitDetails>()._class.unitButton = ImageButton;
         }
@@ -31,10 +40,10 @@ public class PlaceUnits : MonoBehaviour
     {
         int count = 0;
         GlobalVars.PlacedCount = 0;
-        unitPlacePanel.SetActive(true);
+        guiController.unitPlacePanel.SetActive(true);
 
         GlobalVars.PLACE_MODE = true;
-        mousetile.SelectedTile.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        mouseTile.SelectedTile.gameObject.GetComponent<MeshRenderer>().enabled = false;
 
         foreach (GameObject go in TurnController.playerUnits)
         {
@@ -47,8 +56,9 @@ public class PlaceUnits : MonoBehaviour
 
     public void donePlacing()
     {
-        statusText.text = "Battle";
-        unitPlacePanel.SetActive(false);
+        guiController.setStatusText("Battle");
+        guiController.unitPlacePanel.SetActive(false);
+        turnController.FinishedPlacing();
     }
 	
 }
