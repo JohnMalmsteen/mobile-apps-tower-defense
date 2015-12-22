@@ -13,4 +13,5 @@ public class ScriptManager : MonoBehaviour
     public PredictiveTile predictiveTile;
     public Grid grid;
     public Cereal cereal;
+    public CameraController cameraController;
 }
