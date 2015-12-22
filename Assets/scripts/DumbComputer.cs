@@ -190,12 +190,12 @@ public class DumbComputer : MonoBehaviour
 
         if(GlobalVars.PlayerAliveCount < 0)
         {
-            Application.LoadLevel("LoseScreen");
+            Application.LoadLevel("testScene");
         }
 
         if (GlobalVars.CompAliveCount < 0)
         {
-            Application.LoadLevel("WinScreen");
+            Application.LoadLevel("testScene");
         }
 
         /*
@@ -240,12 +240,12 @@ public class DumbComputer : MonoBehaviour
 
         if (GlobalVars.PlayerAliveCount < 0)
         {
-            Application.LoadLevel("LoseScreen");
+            Application.LoadLevel("testScene");
         }
 
         if (GlobalVars.CompAliveCount < 0)
         {
-            Application.LoadLevel("WinScreen");
+            Application.LoadLevel("testScene");
         }
 
         /*
