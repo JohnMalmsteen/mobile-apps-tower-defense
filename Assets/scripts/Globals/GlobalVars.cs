@@ -23,25 +23,35 @@ public class GlobalVars
     
     public static void UpdateOccupied(GridVector oldGv, GridVector newGv)
     {
-        GridVector g = null;
         int count = 0;
+        int pos = 0;
         bool found = false;
+
+        //Debug.Log(oldGv.x + " : " + oldGv.z);
 
         foreach (GridVector gv in OccupiedGrid)
         {
             if (oldGv.x == gv.x && oldGv.z == gv.z)
             {
-                Debug.Log("Found");
+                pos = count;
                 found = true;
-                count++;
             }
+            
+            count++;
         }
 
         if (found)
         {
-            OccupiedGrid.RemoveAt(count);
-            OccupiedGrid.Add(newGv);
+            //Debug.Log("Found");
+            OccupiedGrid.RemoveAt(pos);
+            OccupiedGrid.Add(new GridVector(newGv.x,newGv.z));
         }
+        else
+        {
+            Debug.Log("Not found");
+        }
+
+        //Debug.Log("Done");
 
         //Debug.Log("Count: " + OccupiedGrid.Count);
     }
@@ -67,6 +77,7 @@ public class GlobalVars
 
     }
     */
+
 
     public static bool CheckGridHalf(int zi)
     {

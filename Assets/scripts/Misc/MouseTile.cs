@@ -136,26 +136,27 @@ public class MouseTile : MonoBehaviour
 
                 GridVector temp = new GridVector(xi, zi);
 
+                GridVector gv = turnController.currentTurnUnit.GetComponent<attachableUnitDetails>()._class.gridVector;
+
                 ////////////////////////////////////////
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    //print("Trying to do user action");
+                    print("Trying to do user action");
 
                     if (GlobalVars.CheckGridSpace(xi, zi))
                     {
-                        //print("Free Grid space");
-
-                        GridVector gv = turnController.currentTurnUnit.GetComponent<attachableUnitDetails>()._class.gridVector;
+                        print("Free Grid space");
                         
-                        //if(Grid.CheckImmediateAdjacencyOnGrid(gv, temp))
+                        if(Grid.CheckImmediateAdjacencyOnGrid(gv, temp))
                         {
-                            //print("Moving");
+                            print("Moving");
 
                             turnController.currentTurnUnit.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position = finalPosition;
-                            gv = new GridVector(xi, zi);
-                            
-                            GlobalVars.UpdateOccupied(turnController.currentTurnUnit.GetComponent<attachableUnitDetails>()._class.gridVector, gv);
+
+                            GlobalVars.UpdateOccupied(gv,temp);
+
+                            turnController.currentTurnUnit.GetComponent<attachableUnitDetails>()._class.gridVector = new GridVector(temp.x, temp.z);
 
                             turnController.unitTurn++;
                         }

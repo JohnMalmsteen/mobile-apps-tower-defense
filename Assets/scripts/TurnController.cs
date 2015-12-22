@@ -84,7 +84,6 @@ public class TurnController : MonoBehaviour
         {
             if (unitTurn > initiative.Count - 1)
             {
-                print("0");
                 unitTurn = 0;
             }
 
@@ -152,6 +151,19 @@ public class TurnController : MonoBehaviour
 
             ++count;
         }
+    }
+    
+    public GameObject GetUnitAt(GridVector gridVector)
+    {
+        foreach (GameObject go in compUnits)
+        {
+            if (go.GetComponent<attachableUnitDetails>()._class.gridVector.x == gridVector.x && go.GetComponent<attachableUnitDetails>()._class.gridVector.z == gridVector.z)
+            {
+                return go;
+            }
+        }
+
+        return null;
     }
 
     public GameObject GetInitUnit(int turn)

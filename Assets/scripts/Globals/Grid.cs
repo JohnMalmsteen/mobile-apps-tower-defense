@@ -13,6 +13,57 @@ public class Grid : MonoBehaviour
         //GlobalVars.OccupiedGrid.Add(new GridVector(5, 3));
     }
 
+    public static GridVector CheckforHuman(GridVector g)
+    {
+        foreach (GridVector grid in GlobalVars.OccupiedGrid)
+        {
+            if ((g.x + 1) == grid.x && g.z == grid.z)
+            {
+                return grid;
+            }
+
+            if ((g.x - 1) == grid.x && g.z == grid.z)
+            {
+                return grid;
+            }
+
+            if (g.x == grid.x && (g.z + 1) == grid.z)
+            {
+                return grid;
+            }
+
+            if (g.x == grid.x && (g.z - 1) == grid.z)
+            {
+                return grid;
+            }
+
+            ////////////////////////////////////////////////////////////////
+
+            if ((g.x + 1) == grid.x && (g.z + 1) == grid.z)
+            {
+                return grid;
+            }
+
+            if ((g.x - 1) == grid.x && (g.z + 1) == grid.z)
+            {
+                return grid;
+            }
+
+            if ((g.x + 1) == grid.x && (g.z - 1) == grid.z)
+            {
+                return grid;
+            }
+
+            if ((g.x - 1) == grid.x && (g.z - 1) == grid.z)
+            {
+                return grid;
+            }
+
+        }
+
+        return null;
+    }
+
     public static Color CheckAvailabilityOnGridColor(GridVector gridVector,bool mode)
     {
         foreach (GridVector gv in GlobalVars.OccupiedGrid)
@@ -54,6 +105,8 @@ public class Grid : MonoBehaviour
     public static bool CheckImmediateAdjacencyOnGrid(GridVector currP,GridVector otherP)
     {
         /// N,S,E,W
+        
+        //print(currP.x + "," + currP.z + " : " + otherP.x + "," + otherP.z);
 
         try
         {

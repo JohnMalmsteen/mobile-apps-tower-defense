@@ -22,7 +22,7 @@ public class DumbComputer : MonoBehaviour
     public void FindAndAttack(GameObject enemyCurr)
     {
         GameObject currentEnemy = enemyCurr;
-        GameObject closestPlayerUnit;
+        GameObject closestPlayerUnit = null;
         int closestCost = 100;
 
         Quaternion q = new Quaternion(0, 0, 0, 0);
@@ -40,7 +40,7 @@ public class DumbComputer : MonoBehaviour
         }
 
         GridVector e = enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector;
-        GridVector p = currentEnemy.GetComponent<attachableUnitDetails>()._class.gridVector;
+        GridVector p = closestPlayerUnit.GetComponent<attachableUnitDetails>()._class.gridVector;
 
         Vector3 finalPosition = Vector3.zero;
         GridVector gv;
@@ -50,87 +50,89 @@ public class DumbComputer : MonoBehaviour
         //////////////////////////////////////////////////////////////////////
 
         bool attackRange = false;
-        bool choice = false;
+
+        GridVector close = Grid.CheckforHuman(e);
         
-        if((e.x - 1) == p.x && (e.z - 1) == p.z)
+        /*
+        if (close != null)
         {
+            print("close: " + close.x + " " + close.z);
             print("In attack range");
             attackRange = true;
         }
+        */
 
         if(!attackRange)
         {
-            if (e.z > p.z)
+            print("Computer Compare: " + e.z + " " + p.z);
+
+            if (e.z < p.z)
             {
                 gv = new GridVector(e.x, e.z + 1);
-
-                print("1");
-
+                
                 if (GlobalVars.CheckGridSpace(gv.x, gv.z))
                 {
+                    print("1");
+
                     finalPosition = new Vector3(e.x, 0, e.z + 1);
                     enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position = finalPosition;
-                    
                     GlobalVars.UpdateOccupied(enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector, gv);
 
-                    choice = true;
+                    enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector = gv;
                 }
             }
-            else
+            else if(e.z > p.z)
             {
-                print("2");
-
                 gv = new GridVector(e.x, e.z - 1);
 
                 if (GlobalVars.CheckGridSpace(gv.x, gv.z))
                 {
+                    print("2");
+
                     finalPosition = new Vector3(e.x, 0, e.z - 1);
-
                     enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position = finalPosition;
-                    
                     GlobalVars.UpdateOccupied(enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector, gv);
-
-                    choice = true;
+                    
+                    enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector = gv;
                 }
             }
-
-            if (!choice)
+            else
             {
-
                 if (e.x > p.x)
                 {
-                    gv = new GridVector(e.z - 1, e.z);
-                    print("3");
+                    gv = new GridVector(e.x - 1, e.z);
 
                     if (GlobalVars.CheckGridSpace(gv.x, gv.z))
                     {
+                        print("3");
 
                         finalPosition = new Vector3((e.x - 1), 0, e.z);
                         enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position = finalPosition;
+                        GlobalVars.UpdateOccupied(enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector, gv);
+
+                        enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector = gv;
                     }
-
-                    //GlobalVars.UpdateOccupied(enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector, gv);
-
                 }
                 else
                 {
-                    print("4");
 
-                    gv = new GridVector(e.z + 1, e.z);
+                    gv = new GridVector(e.x + 1, e.z);
 
                     if (GlobalVars.CheckGridSpace(gv.x, gv.z))
                     {
+                        print("4");
 
                         finalPosition = new Vector3((e.x + 1), 0, e.z);
-                        enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position = finalPosition;
+                        enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position = finalPosition;                        
+                        GlobalVars.UpdateOccupied(enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector, gv);
+
+                        enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector = gv;
                     }
 
-                    //GlobalVars.UpdateOccupied(enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector, gv);
                 }
-
             }
 
-            print("Final position: " + finalPosition);
+            //print("Final position: " + finalPosition);
 
         }//
         else
@@ -240,9 +242,9 @@ public class DumbComputer : MonoBehaviour
             compModComp._class.unitBoardModel.gameObject.transform.SetParent(compPieces.transform);
             
             GlobalVars.ComputerPlacedCount++;
-        }             
-        
+        }
 
+        print("GlobalVars.OccupiedGrid: " + GlobalVars.OccupiedGrid.Count);
     }
 
 
