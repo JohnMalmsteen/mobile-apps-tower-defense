@@ -1,6 +1,9 @@
 # Nebins Tower
 Unity Tower Defense Game for our Mobile Applications Project.
 
+NB. The serverside code is a project in itself, we strongly recommend you check it out.
+[Server Code](https://github.com/JohnMalmsteen/mobile-apps-server-code)
+
 ## Gameplay
 You are a skilled adventurer who seeks to reclaim a lost relic which is held by the Gnome Illusionist Nebin. You must fight through his array of defenses to reach and breach his tower and reclaim your birthright.
 
@@ -11,7 +14,7 @@ You are a skilled adventurer who seeks to reclaim a lost relic which is held by 
 * Design of the Game
 * Screenshots
 * Project Specifications
-* Future Plans
+* Serverside Code
 * Collaborators
 
 ## Design of the Game
@@ -37,7 +40,9 @@ The project was created using Unity3D. All of the game code is written entirely 
 
 ## ServerSide Code
 
+The serverside code is a project in itself, we strongly recommend you check it out.
 
+[Server Code](https://github.com/JohnMalmsteen/mobile-apps-server-code)
 
 ## References
 
