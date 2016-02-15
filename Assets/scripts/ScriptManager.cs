@@ -14,4 +14,5 @@ public class ScriptManager : MonoBehaviour
     public Grid grid;
     public Cereal cereal;
     public CameraController cameraController;
+    public InfoPanel infopanel;
 }

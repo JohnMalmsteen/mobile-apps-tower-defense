@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: c2e434c37fdca264fad1bfd0476adb38
-timeCreated: 1449539793
+timeCreated: 1455478764
 licenseType: Free
 SubstanceImporter:
   serializedVersion: 5
@@ -112,14 +112,14 @@ SubstanceImporter:
             name: _MainTex
           second:
             texture: {instanceID: 0}
-            scale: {x: 1, y: 1}
+            scale: {x: 8, y: 8}
             offset: {x: 0, y: 0}
         data:
           first:
             name: _BumpMap
           second:
             texture: {instanceID: 0}
-            scale: {x: 1, y: 1}
+            scale: {x: 8, y: 8}
             offset: {x: 0, y: 0}
         data:
           first:
@@ -133,14 +133,14 @@ SubstanceImporter:
             name: _ParallaxMap
           second:
             texture: {instanceID: 0}
-            scale: {x: 1, y: 1}
+            scale: {x: 8, y: 8}
             offset: {x: 0, y: 0}
         data:
           first:
             name: _OcclusionMap
           second:
             texture: {instanceID: 0}
-            scale: {x: 1, y: 1}
+            scale: {x: 8, y: 8}
             offset: {x: 0, y: 0}
         data:
           first:
@@ -168,7 +168,7 @@ SubstanceImporter:
             name: _SpecGlossMap
           second:
             texture: {instanceID: 0}
-            scale: {x: 1, y: 1}
+            scale: {x: 8, y: 8}
             offset: {x: 0, y: 0}
       floats:
         data:

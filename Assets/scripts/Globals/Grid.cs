@@ -99,6 +99,7 @@ public class Grid : MonoBehaviour
         {            
             if (gv.x == gridVector.x && gv.z == gridVector.z)
             {
+
                 return WRONG;
             }
 

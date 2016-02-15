@@ -32,7 +32,7 @@ public class MouseTile : MonoBehaviour
 
     void Update()
     {
-        if (GlobalVars.PLACE_MODE)
+        if (GlobalVars.PLACE_MODE && GlobalVars.MOUSE)
         {
             Vector3 position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.y));
 
@@ -100,7 +100,7 @@ public class MouseTile : MonoBehaviour
 
         ////////////////////////////////////////////////////////////////////////////////////////////
 
-        if (GlobalVars.PLAYER_TURN)
+        if (GlobalVars.PLAYER_TURN && GlobalVars.MOUSE)
         {
             Vector3 position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.y));
 

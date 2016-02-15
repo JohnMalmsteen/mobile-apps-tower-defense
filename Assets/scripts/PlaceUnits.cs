@@ -8,6 +8,7 @@ public class PlaceUnits : MonoBehaviour
     guiController guiController;
     MouseTile mouseTile;
     TurnController turnController;
+    InfoPanel infopanel;
 
     public void Start()
     {
@@ -15,6 +16,7 @@ public class PlaceUnits : MonoBehaviour
         guiController = scriptManager.guiController;
         turnController = scriptManager.turnController;
         mouseTile = scriptManager.mouseTile;
+        infopanel = scriptManager.infopanel;
     }
 
     public void fillUnitBar()
@@ -59,6 +61,8 @@ public class PlaceUnits : MonoBehaviour
         guiController.setStatusText("Battle");
         guiController.unitPlacePanel.SetActive(false);
         turnController.FinishedPlacing();
+
+        infopanel.HideAreas();
     }
 	
 }

@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
     {
         max = AltCam.Length;
 
-        print("max cam: " + max);
+        //print("max cam: " + max);
     }
 
     public void ChangeView()

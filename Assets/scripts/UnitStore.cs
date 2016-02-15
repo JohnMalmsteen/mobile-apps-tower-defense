@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class UnitStore : MonoBehaviour
 {
     public PlaceUnits pu;
+    public InfoPanel infoPanel;
 
     attachableUnitDetails deets;
     GameObject playerUnit;
@@ -181,6 +182,8 @@ public class UnitStore : MonoBehaviour
     {
         display_UnitStoreMenu();
         pu.fillUnitBar();
+
+        infoPanel.Show_PlaceUnitText();
 
     }// finishedBuying()
 

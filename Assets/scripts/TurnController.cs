@@ -174,6 +174,8 @@ public class TurnController : MonoBehaviour
         return null;
     }
 
+    //public bool EnemyThere
+
     public GameObject GetInitUnit(int turn)
     {
         int count = 0;

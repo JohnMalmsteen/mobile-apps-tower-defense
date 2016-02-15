@@ -7,6 +7,7 @@ public class GlobalVars
 {
     public static bool PLACE_MODE = false;
     public static bool PLAYER_TURN = false;
+    public static bool MOUSE = false;
 
     public static int GridSize = 10;
     public static int StartRowCount = 3;
@@ -98,10 +99,8 @@ public class GlobalVars
             if (gv.x == x && gv.z == z)
                 return false;
         }
-
     }
     */
-
 
     public static bool CheckGridHalf(int zi)
     {
