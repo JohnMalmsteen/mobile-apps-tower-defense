@@ -7,7 +7,7 @@ NB. The serverside code is a project in itself, we strongly recommend you check 
 ## Gameplay
 You are a skilled adventurer who seeks to reclaim a lost relic which is held by the Gnome Illusionist Nebin. You must fight through his array of defenses to reach and breach his tower and reclaim your birthright.
 
-![Screenshot](http://puu.sh/m5lto/724ae0777c.jpg)
+![Screenshot](http://puu.sh/n9iQN/ef8715672c.jpg)
 
 ## Contents
 
