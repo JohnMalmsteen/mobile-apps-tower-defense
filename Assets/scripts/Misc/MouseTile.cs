@@ -187,6 +187,8 @@ public class MouseTile : MonoBehaviour
 
                         turnController.unitTurn++;
                     }
+
+                    turnController.DrawHealth();
                 }
 
                 ////////////////////////////////////////

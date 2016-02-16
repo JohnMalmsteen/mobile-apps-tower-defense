@@ -12,7 +12,7 @@ public class TurnController : MonoBehaviour
 
     public static List<GameObject> playerUnits = new List<GameObject>();
     public static List<GameObject> compUnits = new List<GameObject>();
-    public static SortedDictionary<int,GameObject> initiative = new SortedDictionary<int, GameObject>();
+    public static SortedDictionary<int, GameObject> initiative = new SortedDictionary<int, GameObject>();
     public static GameObject nebinsTower;
     public static int turnCount = 0;
     public static bool levelOver = false;
@@ -20,9 +20,11 @@ public class TurnController : MonoBehaviour
 
     public GameObject currentTurnUnit;
     public GameObject activeTile;
+    public GameObject healthCanvas;
+    public GameObject healthUIObject;
 
     public Queue<GameObject> actionOrder = new Queue<GameObject>();
-    
+
     attachableUnitDetails nebinsTowerAttachable;
 
     bool turnOver = true;
@@ -36,6 +38,13 @@ public class TurnController : MonoBehaviour
         dumbComputer = scriptManager.dumbComputer;
         guiController = scriptManager.guiController;
 
+        // Calling the SetUpPhase
+
+        SetUpPhase();        
+    }
+
+    public void SetUpPhase()
+    {
         nebinsTower = GameObject.Find("nebinsTower").AddComponent<attachableUnitDetails>().gameObject;
         nebinsTowerAttachable = nebinsTower.GetComponent<attachableUnitDetails>();
 
@@ -55,14 +64,6 @@ public class TurnController : MonoBehaviour
 		actionOrder = new Queue<attachableUnitDetails>(combined);
         */
 
-        // Calling the SetUpPhase
-
-        SetUpPhase();
-
-    }
-
-    public void SetUpPhase()
-    {
         unitstore.display_UnitStoreMenu();
     }
 
@@ -76,11 +77,13 @@ public class TurnController : MonoBehaviour
         ShowInitiativeList();
 
         StartCoroutine(GameLoop());
+
+        DrawHealth();
     }
 
     IEnumerator GameLoop()
     {
-        while(GlobalVars.PlayerAliveCount > 0 && GlobalVars.CompAliveCount > 0)
+        while (GlobalVars.PlayerAliveCount > 0 && GlobalVars.CompAliveCount > 0)
         {
             if (unitTurn > initiative.Count - 1)
             {
@@ -91,7 +94,7 @@ public class TurnController : MonoBehaviour
 
             activeTile.transform.position = GetInitUnit(unitTurn).gameObject.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position;
 
-            ButtonUpdate(GetInitUnit(unitTurn),unitTurn);
+            ButtonUpdate(GetInitUnit(unitTurn), unitTurn);
 
             if (GetInitUnit(unitTurn).GetComponent<attachableUnitDetails>().owner == 0) // IF HUMAN
             {
@@ -116,7 +119,7 @@ public class TurnController : MonoBehaviour
             }
 
             yield return new WaitForSeconds(1);
-            
+
         }
 
     }
@@ -131,11 +134,11 @@ public class TurnController : MonoBehaviour
         yield return new WaitForSeconds(1);
     }
 
-    public void ButtonUpdate(GameObject go,int updateThis)
+    public void ButtonUpdate(GameObject go, int updateThis)
     {
-        foreach(KeyValuePair<int,GameObject> g in initiative)
+        foreach (KeyValuePair<int, GameObject> g in initiative)
         {
-            g.Value.gameObject.GetComponent<attachableUnitDetails>()._class.unitButton.GetComponent<Outline>().effectDistance = new Vector2(0,0);
+            g.Value.gameObject.GetComponent<attachableUnitDetails>()._class.unitButton.GetComponent<Outline>().effectDistance = new Vector2(0, 0);
             g.Value.gameObject.GetComponent<attachableUnitDetails>()._class.unitButton.GetComponent<Outline>().effectColor = Color.black;
         }
 
@@ -152,7 +155,7 @@ public class TurnController : MonoBehaviour
             ++count;
         }
     }
-    
+
     public GameObject GetUnitAt(GridVector gridVector)
     {
         foreach (GameObject go in compUnits)
@@ -174,15 +177,13 @@ public class TurnController : MonoBehaviour
         return null;
     }
 
-    //public bool EnemyThere
-
     public GameObject GetInitUnit(int turn)
     {
         int count = 0;
 
         //print("initiative: " + initiative.Count + " : " + turn);
 
-        foreach(KeyValuePair<int,GameObject> go in initiative)
+        foreach (KeyValuePair<int, GameObject> go in initiative)
         {
             if (count == turn)
             {
@@ -197,9 +198,6 @@ public class TurnController : MonoBehaviour
         return null;
     }
     
-
-    ///////////////////////////////////////////////////////////////////////////
-
     public int GameLoop(Queue<GameObject> actionQueue)
     {
         while (!levelOver)
@@ -251,9 +249,9 @@ public class TurnController : MonoBehaviour
 
     public void ShowInitiativeList()
     {
-        foreach(GameObject go in playerUnits)
+        foreach (GameObject go in playerUnits)
         {
-            if(!initiative.ContainsKey(go.gameObject.GetComponent<attachableUnitDetails>()._class.initiative))
+            if (!initiative.ContainsKey(go.gameObject.GetComponent<attachableUnitDetails>()._class.initiative))
                 initiative.Add(go.gameObject.GetComponent<attachableUnitDetails>()._class.initiative, go);
 
             else
@@ -283,7 +281,7 @@ public class TurnController : MonoBehaviour
         foreach (KeyValuePair<int, GameObject> kv in initiative)
         {
             //print("Key: " + kv.Key);
-            
+
             guiController.initiativePanel.SetActive(true);
 
             GameObject ImageButton = new GameObject();
@@ -306,10 +304,56 @@ public class TurnController : MonoBehaviour
             }
 
             if (kv.Value.gameObject.GetComponent<attachableUnitDetails>().owner == 1)
-            ImageButton.GetComponent<Image>().color = Color.red;
+                ImageButton.GetComponent<Image>().color = Color.red;
 
             ++count;
         }
     }
 
+    ////////////////////////////////////////////////////////////
+
+    public void DrawHealth()
+    {
+        int health = 0;
+        float offset = 0.0f;
+
+        foreach (Transform child in healthCanvas.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        foreach (GameObject go in playerUnits)
+        {
+            health = go.GetComponent<attachableUnitDetails>().unit.health;
+
+            Vector3 screenPosition = Camera.main.WorldToScreenPoint(go.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position);
+
+            screenPosition = new Vector3(screenPosition.x + offset, screenPosition.y, screenPosition.z);
+
+            GameObject ui = Instantiate(healthUIObject, screenPosition, Quaternion.identity) as GameObject;
+
+            ui.GetComponent<Image>().color = Color.green;
+
+            ui.GetComponentInChildren<Text>().text = "" + health;
+
+            ui.transform.parent = healthCanvas.gameObject.transform;
+        }
+
+        foreach (GameObject go in compUnits)
+        {
+            health = go.GetComponent<attachableUnitDetails>().unit.health;
+
+            Vector3 screenPosition = Camera.main.WorldToScreenPoint(go.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position);
+
+            screenPosition = new Vector3(screenPosition.x + offset, screenPosition.y, screenPosition.z);
+
+            GameObject ui = Instantiate(healthUIObject, screenPosition, Quaternion.identity) as GameObject;
+
+            ui.GetComponent<Image>().color = Color.red;
+
+            ui.GetComponentInChildren<Text>().text = "" + health;
+
+            ui.transform.parent = healthCanvas.gameObject.transform;
+        }
+    }
 }

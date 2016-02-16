@@ -153,9 +153,9 @@ public class DumbComputer : MonoBehaviour
             }
 
             //print("Final position: " + finalPosition);
-
         }
 
+        turnController.DrawHealth();
     }
 
     public void CheckPlayerDead(GameObject player)
@@ -362,7 +362,4 @@ public class DumbComputer : MonoBehaviour
 
         //print("GlobalVars.OccupiedGrid: " + GlobalVars.OccupiedGrid.Count);
     }
-
-
-
 }
