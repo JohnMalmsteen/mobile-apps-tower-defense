@@ -9,6 +9,7 @@ public class MouseTile : MonoBehaviour
     TurnController turnController;
     DumbComputer dumbComputer;
     guiController guiController;
+    MessageController messageController;
 
     public PlaceUnits placeunits;
 
@@ -26,6 +27,7 @@ public class MouseTile : MonoBehaviour
         turnController = scriptManager.turnController;
         dumbComputer = scriptManager.dumbComputer;
         guiController = scriptManager.guiController;
+        messageController = scriptManager.messageController;
 
         //currentTurnUnit
     }
@@ -68,11 +70,13 @@ public class MouseTile : MonoBehaviour
                 int xi, zi;
 
                 xi = Convert.ToInt32(x);
-                zi = Convert.ToInt32(z); 
+                zi = Convert.ToInt32(z);
+                
+                GridVector curr = new GridVector(-1, -1);
 
                 if (Input.GetMouseButtonDown(0) && GlobalVars.CheckGridHalf(zi))
                 {
-                    if (GlobalVars.PlacedCount < TurnController.playerUnits.Count && GlobalVars.CheckGridSpace(xi, zi))
+                    if (GlobalVars.PlacedCount < TurnController.playerUnits.Count && GlobalVars.CheckGridSpace(curr, xi, zi))
                     {
                         if (currentPosition.x >= 0.5f && currentPosition.x <= GlobalVars.GridSize + 0.5f && currentPosition.z >= 0.5f && currentPosition.z <= GlobalVars.GridSize + 0.5f)
                         {
@@ -148,7 +152,7 @@ public class MouseTile : MonoBehaviour
                 {
                     //print("Trying to do user action");
 
-                    if (GlobalVars.CheckGridSpace(xi, zi))
+                    if (GlobalVars.CheckGridSpace(gv,xi, zi))
                     {
                         //print("Free Grid space");
                         
@@ -173,19 +177,22 @@ public class MouseTile : MonoBehaviour
                     {
                         // Try attack
 
-                        GameObject go = turnController.GetUnitAt(new GridVector(xi, zi));
+                        if(gv.x != xi && gv.z != zi) // Stops player from attacking himself
+                        {
+                            GameObject go = turnController.GetUnitAt(new GridVector(xi, zi));
 
-                        int difference = go.GetComponent<attachableUnitDetails>().unit.health;
+                            int difference = go.GetComponent<attachableUnitDetails>().unit.health;
 
-                        go.GetComponent<attachableUnitDetails>().unit.takeDmg(turnController.currentTurnUnit.GetComponent<attachableUnitDetails>().unit.playerAtk());
+                            go.GetComponent<attachableUnitDetails>().unit.takeDmg(turnController.currentTurnUnit.GetComponent<attachableUnitDetails>().unit.playerAtk());
 
-                        difference -= go.GetComponent<attachableUnitDetails>().unit.health;
+                            difference -= go.GetComponent<attachableUnitDetails>().unit.health;
 
-                        guiController.statusText.text = "Attacked the computer for: " + difference;
+                            messageController.UpdateStatusMessage("Attacked the computer for: " + difference + "!");
 
-                        dumbComputer.CheckComputerDead(go);
+                            dumbComputer.CheckComputerDead(go);
 
-                        turnController.unitTurn++;
+                            turnController.unitTurn++;
+                        }
                     }
 
                     turnController.DrawHealth();

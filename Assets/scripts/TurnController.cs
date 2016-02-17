@@ -334,7 +334,7 @@ public class TurnController : MonoBehaviour
 
             ui.GetComponent<Image>().color = Color.green;
 
-            ui.GetComponentInChildren<Text>().text = "" + health;
+            ui.GetComponentInChildren<Text>().text = "HP: " + health;
 
             ui.transform.parent = healthCanvas.gameObject.transform;
         }
@@ -351,7 +351,7 @@ public class TurnController : MonoBehaviour
 
             ui.GetComponent<Image>().color = Color.red;
 
-            ui.GetComponentInChildren<Text>().text = "" + health;
+            ui.GetComponentInChildren<Text>().text = "HP: " + health;
 
             ui.transform.parent = healthCanvas.gameObject.transform;
         }

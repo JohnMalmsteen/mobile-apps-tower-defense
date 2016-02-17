@@ -11,6 +11,7 @@ public class DumbComputer : MonoBehaviour
     SpritesModels spriteModels;
     TurnController turnController;
     guiController guiController;
+    MessageController messageController;
     Grid grid;
 
     int x, z;
@@ -21,7 +22,8 @@ public class DumbComputer : MonoBehaviour
         spriteModels = scriptManager.spriteModels;
         turnController = scriptManager.turnController;
         guiController = scriptManager.guiController;
-
+        messageController = scriptManager.messageController;
+        
         grid = scriptManager.grid;
     }
 
@@ -61,21 +63,21 @@ public class DumbComputer : MonoBehaviour
 
         if (close != null)
         {
-            print("In attack range");
+            //print("In attack range");
             
             GameObject go = turnController.GetUnitAt(close);
             
             int difference = go.GetComponent<attachableUnitDetails>().unit.health;
 
-            print("Health Before: " + go.GetComponent<attachableUnitDetails>().unit.health);
+            //print("Health Before: " + go.GetComponent<attachableUnitDetails>().unit.health);
 
             go.GetComponent<attachableUnitDetails>().unit.takeDmg(enemyCurr.GetComponent<attachableUnitDetails>().unit.compAtk());
 
-            print("Health After: " + go.GetComponent<attachableUnitDetails>().unit.health);
+            //print("Health After: " + go.GetComponent<attachableUnitDetails>().unit.health);
 
             difference -= go.GetComponent<attachableUnitDetails>().unit.health;
 
-            guiController.statusText.text = "Attacked by computer for: " + difference;
+            messageController.UpdateStatusMessage("Attacked by player for: " + difference + "!");
 
             CheckPlayerDead(go);
 
@@ -86,11 +88,13 @@ public class DumbComputer : MonoBehaviour
         {
             //print("Computer Compare: " + e.z + " " + p.z);
 
+            GridVector curr = new GridVector(-1, -1);
+
             if (e.z < p.z)
             {
                 gv = new GridVector(e.x, e.z + 1);
                 
-                if (GlobalVars.CheckGridSpace(gv.x, gv.z))
+                if (GlobalVars.CheckGridSpace(curr,gv.x, gv.z))
                 {
                     //print("1");
 
@@ -105,7 +109,7 @@ public class DumbComputer : MonoBehaviour
             {
                 gv = new GridVector(e.x, e.z - 1);
 
-                if (GlobalVars.CheckGridSpace(gv.x, gv.z))
+                if (GlobalVars.CheckGridSpace(curr, gv.x, gv.z))
                 {
                     //print("2");
 
@@ -122,7 +126,7 @@ public class DumbComputer : MonoBehaviour
                 {
                     gv = new GridVector(e.x - 1, e.z);
 
-                    if (GlobalVars.CheckGridSpace(gv.x, gv.z))
+                    if (GlobalVars.CheckGridSpace(curr, gv.x, gv.z))
                     {
                         //print("3");
 
@@ -138,7 +142,7 @@ public class DumbComputer : MonoBehaviour
 
                     gv = new GridVector(e.x + 1, e.z);
 
-                    if (GlobalVars.CheckGridSpace(gv.x, gv.z))
+                    if (GlobalVars.CheckGridSpace(curr, gv.x, gv.z))
                     {
                         //print("4");
 
@@ -176,7 +180,7 @@ public class DumbComputer : MonoBehaviour
 
             if (found)
             {
-                print("Removed Player");
+                //print("Removed Player");
 
                 TurnController.initiative.Remove(k);
             }
@@ -226,7 +230,7 @@ public class DumbComputer : MonoBehaviour
 
             if (found)
             {
-                print("Removed Player");
+                //print("Removed Player");
 
                 TurnController.initiative.Remove(k);
             }
@@ -276,6 +280,8 @@ public class DumbComputer : MonoBehaviour
     {
         GameObject compUnit;
         attachableUnitDetails deets;
+
+        GridVector curr = new GridVector(-1, -1);
 
         while (GlobalVars.ComputerPlacedCount < GlobalVars.MAX_UNITS)
         {
@@ -336,7 +342,7 @@ public class DumbComputer : MonoBehaviour
                 x = Random.Range(1, GlobalVars.GridSize);
                 z = Random.Range(GlobalVars.GridSize - GlobalVars.StartRowCount, GlobalVars.GridSize);
 
-                foundPlace = GlobalVars.CheckGridSpace(x, z);
+                foundPlace = GlobalVars.CheckGridSpace(curr, x, z);
             }
 
             compModComp._class.gridVector = new GridVector(x, z);

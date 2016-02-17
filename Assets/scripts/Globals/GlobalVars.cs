@@ -57,8 +57,11 @@ public class GlobalVars
         //Debug.Log("Count: " + OccupiedGrid.Count);
     }
 
-    public static bool CheckGridSpace(int x, int z)
+    public static bool CheckGridSpace(GridVector curr,int x, int z)
     {
+        if (curr.x == x && curr.z == z)
+            return false;
+
         foreach (GridVector gv in OccupiedGrid)
         {
             if (gv.x == x && gv.z == z)
