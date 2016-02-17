@@ -30,7 +30,7 @@ We wanted to take a spin on this type of design and make our own turn based, 3D,
 ## Screenshots
 
 ![BattleChess](http://puu.sh/m5lnm/d28a1f26a4.jpg)
-![BattleChess](http://puu.sh/m5lpu/6bc3d5525e.jpg)
+![BattleChess](http://puu.sh/naCb3/9a32f52e5e.jpg)
 
 ## Project Specifications
 
