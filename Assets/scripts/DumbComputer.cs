@@ -33,8 +33,8 @@ public class DumbComputer : MonoBehaviour
         GameObject closestPlayerUnit = null;
         int closestCost = 100;
 
-        Quaternion q = new Quaternion(0, 0, 0, 0);
-        Quaternion q2 = new Quaternion(0, 180.0f, 0, 0);
+        //Quaternion q = new Quaternion(0, 0, 0, 0);
+        //Quaternion q2 = new Quaternion(0, 180.0f, 0, 0);
 
         foreach (GameObject go in TurnController.playerUnits)
         {

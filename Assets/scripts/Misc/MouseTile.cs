@@ -106,7 +106,9 @@ public class MouseTile : MonoBehaviour
 
         if (GlobalVars.PLAYER_TURN && GlobalVars.MOUSE)
         {
-            Vector3 position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.y));
+            //Vector3 position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.y));
+
+            Vector3 position = Camera.main.ViewportToScreenPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.y));
 
             currentPosition = position;
 

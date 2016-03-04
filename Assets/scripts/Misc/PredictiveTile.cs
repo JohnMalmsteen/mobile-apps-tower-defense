@@ -10,8 +10,12 @@ public class PredictiveTile : MonoBehaviour
     private List<GameObject> PredictiveTiles = new List<GameObject>();
     private int Count = 0;
     
-    void ShowMovementSquares(GridVector CurrentPosition,int MovementCount)
+    public void ShowMovementSquares(GridVector CurrentPosition,int MovementCount)
     {
+        CleanUpTiles();
+
+        print("Creating Tiles");
+
         for (int i = 0; i < MovementCount; i++) // North
         {
             if (Grid.CheckAvailabilityOnGrid(new GridVector(CurrentPosition.x, CurrentPosition.z + i)))

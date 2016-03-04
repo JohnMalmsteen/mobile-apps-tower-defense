@@ -9,6 +9,7 @@ public class TurnController : MonoBehaviour
     ScriptManager scriptManager;
     DumbComputer dumbComputer;
     guiController guiController;
+    PredictiveTile predictiveTile;
 
     public static List<GameObject> playerUnits = new List<GameObject>();
     public static List<GameObject> compUnits = new List<GameObject>();
@@ -37,6 +38,7 @@ public class TurnController : MonoBehaviour
         unitstore = scriptManager.unitStore;
         dumbComputer = scriptManager.dumbComputer;
         guiController = scriptManager.guiController;
+        predictiveTile = scriptManager.predictiveTile;
 
         // Calling the SetUpPhase
 
@@ -101,6 +103,8 @@ public class TurnController : MonoBehaviour
                 GlobalVars.PLAYER_TURN = true;
 
                 currentTurnUnit = GetInitUnit(unitTurn);
+
+                //predictiveTile.ShowMovementSquares(currentTurnUnit.GetComponent<attachableUnitDetails>()._class.gridVector,1);
 
                 //print("Trying Human");
 

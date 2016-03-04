@@ -11,9 +11,15 @@ public class InfoPanel : MonoBehaviour
 
     bool firstTimePlacing = false;
 
+    MessageController messageController;
+    ScriptManager scriptManager;
+
     public void Start()
     {
         Show_BuyUnitText();
+
+        scriptManager = GameObject.Find("ScriptManager").GetComponent<ScriptManager>();
+        messageController = scriptManager.messageController;
     }
 
     public void Show_BuyUnitText()
@@ -49,7 +55,10 @@ public class InfoPanel : MonoBehaviour
     public void CloseWindow()
     {
         if (firstTimePlacing)
+        {
+            messageController.PlaceMessage();
             GlobalVars.MOUSE = true;
+        }
 
         infoWindow.gameObject.SetActive(false);
 
