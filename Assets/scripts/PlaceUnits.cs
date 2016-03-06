@@ -47,7 +47,8 @@ public class PlaceUnits : MonoBehaviour
         GlobalVars.PLACE_MODE = true;
         mouseTile.SelectedTile.gameObject.GetComponent<MeshRenderer>().enabled = false;
 
-        foreach (GameObject go in TurnController.playerUnits)
+        while(count < TurnController.playerUnits.Count)
+        //foreach (GameObject go in TurnController.playerUnits)
         {
             TurnController.playerUnits[count].gameObject.GetComponent<attachableUnitDetails>()._class.unitButton.SetActive(true);
             Destroy(TurnController.playerUnits[count].gameObject.GetComponent<attachableUnitDetails>()._class.unitBoardModel);

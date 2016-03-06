@@ -9,7 +9,6 @@ public class TurnController : MonoBehaviour
     ScriptManager scriptManager;
     DumbComputer dumbComputer;
     guiController guiController;
-    PredictiveTile predictiveTile;
 
     public static List<GameObject> playerUnits = new List<GameObject>();
     public static List<GameObject> compUnits = new List<GameObject>();
@@ -27,9 +26,7 @@ public class TurnController : MonoBehaviour
     public Queue<GameObject> actionOrder = new Queue<GameObject>();
 
     attachableUnitDetails nebinsTowerAttachable;
-
-    bool turnOver = true;
-
+    
     public int unitTurn = 0;
 
     public void Start()
@@ -38,7 +35,6 @@ public class TurnController : MonoBehaviour
         unitstore = scriptManager.unitStore;
         dumbComputer = scriptManager.dumbComputer;
         guiController = scriptManager.guiController;
-        predictiveTile = scriptManager.predictiveTile;
 
         // Calling the SetUpPhase
 
@@ -340,7 +336,7 @@ public class TurnController : MonoBehaviour
 
             ui.GetComponentInChildren<Text>().text = "HP: " + health;
 
-            ui.transform.parent = healthCanvas.gameObject.transform;
+            ui.transform.SetParent(healthCanvas.gameObject.transform);
         }
 
         foreach (GameObject go in compUnits)
@@ -357,7 +353,7 @@ public class TurnController : MonoBehaviour
 
             ui.GetComponentInChildren<Text>().text = "HP: " + health;
 
-            ui.transform.parent = healthCanvas.gameObject.transform;
+            ui.transform.SetParent(healthCanvas.gameObject.transform);
         }
     }
 }

@@ -8,7 +8,6 @@ public class MouseTile : MonoBehaviour
     ScriptManager scriptManager;
     TurnController turnController;
     DumbComputer dumbComputer;
-    guiController guiController;
     MessageController messageController;
 
     public PlaceUnits placeunits;
@@ -26,18 +25,17 @@ public class MouseTile : MonoBehaviour
         scriptManager = GameObject.Find("ScriptManager").GetComponent<ScriptManager>();
         turnController = scriptManager.turnController;
         dumbComputer = scriptManager.dumbComputer;
-        guiController = scriptManager.guiController;
         messageController = scriptManager.messageController;
 
         //currentTurnUnit
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        Vector3 position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.y));
+
         if (GlobalVars.PLACE_MODE && GlobalVars.MOUSE)
         {
-            Vector3 position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.y));
-
             currentPosition = position;
 
             if (position.x >= 0.5f && position.x <= GlobalVars.GridSize + 0.5f && position.z >= 0.5f && position.z <= GlobalVars.GridSize + 0.5f) // Mouse Cursor withing Grid
@@ -95,7 +93,7 @@ public class MouseTile : MonoBehaviour
 
                 SelectedTile.transform.position = finalPosition;
 
-                SelectedTile.GetComponent<MeshRenderer>().material.color = Grid.CheckAvailabilityOnGridColor(new GridVector((int)SelectedTile.transform.position.x, (int)SelectedTile.transform.position.z),true);
+                SelectedTile.GetComponent<MeshRenderer>().material.color = Grid.CheckAvailabilityOnGridColor(null, new GridVector((int)SelectedTile.transform.position.x, (int)SelectedTile.transform.position.z),true);
             }
             else
                 SelectedTile.gameObject.GetComponent<MeshRenderer>().enabled = false;
@@ -106,10 +104,6 @@ public class MouseTile : MonoBehaviour
 
         if (GlobalVars.PLAYER_TURN && GlobalVars.MOUSE)
         {
-            //Vector3 position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.y));
-
-            Vector3 position = Camera.main.ViewportToScreenPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.y));
-
             currentPosition = position;
 
             if (position.x >= 0.5f && position.x <= GlobalVars.GridSize + 0.5f && position.z >= 0.5f && position.z <= GlobalVars.GridSize + 0.5f) // Mouse Cursor withing Grid
@@ -204,7 +198,7 @@ public class MouseTile : MonoBehaviour
 
                 SelectedTile.transform.position = finalPosition;
 
-                SelectedTile.GetComponent<MeshRenderer>().material.color = Grid.CheckAvailabilityOnGridColor(new GridVector((int)SelectedTile.transform.position.x, (int)SelectedTile.transform.position.z), false);
+                SelectedTile.GetComponent<MeshRenderer>().material.color = Grid.CheckAvailabilityOnGridColor(gv,new GridVector((int)SelectedTile.transform.position.x, (int)SelectedTile.transform.position.z), false);
             }
             else
                 SelectedTile.gameObject.GetComponent<MeshRenderer>().enabled = false;

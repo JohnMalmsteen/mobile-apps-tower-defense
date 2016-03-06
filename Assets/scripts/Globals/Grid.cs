@@ -93,18 +93,17 @@ public class Grid : MonoBehaviour
         return null;
     }
 
-    public static Color CheckAvailabilityOnGridColor(GridVector gridVector,bool mode)
+    public static Color CheckAvailabilityOnGridColor(GridVector curr, GridVector gridVector,bool mode)
     {
         foreach (GridVector gv in GlobalVars.OccupiedGrid)
         {            
             if (gv.x == gridVector.x && gv.z == gridVector.z)
             {
-
                 return WRONG;
             }
 
         }//foreach
-                
+
         if (mode)
         {
             if (GlobalVars.CheckGridHalf(gridVector.z))
@@ -112,8 +111,52 @@ public class Grid : MonoBehaviour
             else
                 return WRONG;
         }
+        else
+        {
+            if ((curr.x + 1) == gridVector.x && curr.z == gridVector.z)
+            {
+                return RIGHT;
+            }
 
-        return RIGHT;
+            if ((curr.x - 1) == gridVector.x && curr.z == gridVector.z)
+            {
+                return RIGHT;
+            }
+
+            if (curr.x == gridVector.x && (curr.z + 1) == gridVector.z)
+            {
+                return RIGHT;
+            }
+
+            if (curr.x == gridVector.x && (curr.z - 1) == gridVector.z)
+            {
+                return RIGHT;
+            }
+
+            ////////////////////////////////////////////////////////////////
+
+            if ((curr.x + 1) == gridVector.x && (curr.z + 1) == gridVector.z)
+            {
+                return RIGHT;
+            }
+
+            if ((curr.x - 1) == gridVector.x && (curr.z + 1) == gridVector.z)
+            {
+                return RIGHT;
+            }
+
+            if ((curr.x + 1) == gridVector.x && (curr.z - 1) == gridVector.z)
+            {
+                return RIGHT;
+            }
+
+            if ((curr.x - 1) == gridVector.x && (curr.z - 1) == gridVector.z)
+            {
+                return RIGHT;
+            }
+        }
+
+        return WRONG;
 
     }// Color
 

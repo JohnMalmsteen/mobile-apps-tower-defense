@@ -10,7 +10,6 @@ public class DumbComputer : MonoBehaviour
     ScriptManager scriptManager;
     SpritesModels spriteModels;
     TurnController turnController;
-    guiController guiController;
     MessageController messageController;
     Grid grid;
 
@@ -21,7 +20,6 @@ public class DumbComputer : MonoBehaviour
         scriptManager = GameObject.Find("ScriptManager").GetComponent<ScriptManager>();
         spriteModels = scriptManager.spriteModels;
         turnController = scriptManager.turnController;
-        guiController = scriptManager.guiController;
         messageController = scriptManager.messageController;
         
         grid = scriptManager.grid;
