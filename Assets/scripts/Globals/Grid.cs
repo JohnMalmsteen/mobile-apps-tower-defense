@@ -25,7 +25,6 @@ public class Grid : MonoBehaviour
 
         foreach (GridVector grid in GlobalVars.OccupiedGrid)
         {
-
             if (turnController.GetUnitAt(grid) != null)
             {
                 //print("Owner: " + turnController.GetUnitAt(grid).GetComponent<attachableUnitDetails>().owner);
@@ -44,50 +43,6 @@ public class Grid : MonoBehaviour
                     }
                 }
             }
-
-            /*
-            if ((g.x + 1) == grid.x && g.z == grid.z)
-            {
-                return grid;
-            }
-
-            if ((g.x - 1) == grid.x && g.z == grid.z)
-            {
-                return grid;
-            }
-
-            if (g.x == grid.x && (g.z + 1) == grid.z)
-            {
-                return grid;
-            }
-
-            if (g.x == grid.x && (g.z - 1) == grid.z)
-            {
-                return grid;
-            }
-
-            ////////////////////////////////////////////////////////////////
-
-            if ((g.x + 1) == grid.x && (g.z + 1) == grid.z)
-            {
-                return grid;
-            }
-
-            if ((g.x - 1) == grid.x && (g.z + 1) == grid.z)
-            {
-                return grid;
-            }
-
-            if ((g.x + 1) == grid.x && (g.z - 1) == grid.z)
-            {
-                return grid;
-            }
-
-            if ((g.x - 1) == grid.x && (g.z - 1) == grid.z)
-            {
-                return grid;
-            }
-            */
         }
 
         return null;

@@ -9,6 +9,7 @@ public class MouseTile : MonoBehaviour
     TurnController turnController;
     DumbComputer dumbComputer;
     MessageController messageController;
+    Grid gridscr;
 
     public PlaceUnits placeunits;
 
@@ -26,6 +27,7 @@ public class MouseTile : MonoBehaviour
         turnController = scriptManager.turnController;
         dumbComputer = scriptManager.dumbComputer;
         messageController = scriptManager.messageController;
+        gridscr = scriptManager.grid;
 
         //currentTurnUnit
     }
@@ -33,7 +35,7 @@ public class MouseTile : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.y));
-
+        
         if (GlobalVars.PLACE_MODE && GlobalVars.MOUSE)
         {
             currentPosition = position;
@@ -172,9 +174,57 @@ public class MouseTile : MonoBehaviour
                     else
                     {
                         // Try attack
+                        
+                        bool canAttack = false;
 
-                        if(gv.x != xi && gv.z != zi) // Stops player from attacking himself
+                        if ((gv.x + 1) == temp.x && gv.z == temp.z)
                         {
+                            canAttack = true;
+                        }
+
+                        if ((gv.x - 1) == temp.x && gv.z == temp.z)
+                        {
+                            canAttack = true;
+                        }
+
+                        if (gv.x == temp.x && (gv.z + 1) == temp.z)
+                        {
+                            canAttack = true;
+                        }
+
+                        if (gv.x == temp.x && (gv.z - 1) == temp.z)
+                        {
+                            canAttack = true;
+                        }
+
+                        ////////////////////////////////////////////////////////////////
+
+                        if ((gv.x + 1) == temp.x && (gv.z + 1) == temp.z)
+                        {
+                            canAttack = true;
+                        }
+
+                        if ((gv.x - 1) == temp.x && (gv.z + 1) == temp.z)
+                        {
+                            canAttack = true;
+                        }
+
+                        if ((gv.x + 1) == temp.x && (gv.z - 1) == temp.z)
+                        {
+                            canAttack = true;
+                        }
+
+                        if ((gv.x - 1) == temp.x && (gv.z - 1) == temp.z)
+                        {
+                            canAttack = true;
+                        }
+
+                        if (canAttack && gridscr.CheckforHuman(gv) == null) // Stops player from attacking himself
+                        {
+                            GlobalVars.PLAYER_TURN = false;
+
+                            print("Attacking");
+
                             GameObject go = turnController.GetUnitAt(new GridVector(xi, zi));
 
                             int difference = go.GetComponent<attachableUnitDetails>().unit.health;
@@ -189,6 +239,8 @@ public class MouseTile : MonoBehaviour
 
                             turnController.unitTurn++;
                         }
+                        else
+                            print("Not Attacking: " + canAttack);
                     }
 
                     turnController.DrawHealth();
