@@ -5,7 +5,7 @@ NB. The serverside code is a project in itself, we strongly recommend you check 
 [Server Code](https://github.com/JohnMalmsteen/mobile-apps-server-code)
 
 ## Gameplay
-You are a skilled adventurer who seeks to reclaim a lost relic which is held by the Gnome Illusionist Nebin. You must fight through his array of defenses to reach and breach his tower and reclaim your birthright.
+You are a skilled adventurer who seeks to reclaim a lost relic which is held by the Gnome Illusionist Nebin. You must fight through his array of defenses to reach and breach his tower to reclaim your birthright.
 
 ![Screenshot](http://puu.sh/n9iQN/ef8715672c.jpg)
 
