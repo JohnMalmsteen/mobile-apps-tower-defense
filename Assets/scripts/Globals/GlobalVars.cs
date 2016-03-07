@@ -9,7 +9,8 @@ public class GlobalVars
     public static bool PLAYER_TURN = false;
     public static bool MOUSE = false;
 
-    public static int GridSize = 10;
+    public static int GridSize = 15;
+
     public static int StartRowCount = 3;
 
     public static int PlayerAliveCount = 0;

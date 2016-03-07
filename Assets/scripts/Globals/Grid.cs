@@ -39,7 +39,6 @@ public class Grid : MonoBehaviour
                         return grid;
 
                         //print("This is it: " + grid);
-
                     }
                 }
             }
