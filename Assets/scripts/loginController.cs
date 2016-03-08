@@ -140,4 +140,8 @@ public class loginController : MonoBehaviour {
 
 		Debug.Log (request.Response.DataAsText);
 	}
+
+	public void returnToMain(){
+		Application.LoadLevel ("main");
+	}
 }
