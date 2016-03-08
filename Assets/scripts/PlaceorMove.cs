@@ -238,11 +238,9 @@ public class PlaceorMove : MonoBehaviour, IPointerClickHandler, IPointerDownHand
 
     public void walkUnitToSpace(GameObject unit,Vector3 walkToHere)
     {
-        //turnController.currentTurnUnit.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position = walkToHere;
-
         turnController.currentTurnUnit.GetComponent<attachableUnitDetails>()._class.unitBoardModel.GetComponent<Animator>().Play("Walk Forward");
 
-        StartCoroutine(WalkAnimation(unit, walkToHere, 8f));
+        StartCoroutine(WalkAnimation(unit, walkToHere, 12f));
     }
 
     private IEnumerator WalkAnimation(GameObject unit,Vector3 finishPosition,float time)

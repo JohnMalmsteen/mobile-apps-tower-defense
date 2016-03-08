@@ -97,7 +97,11 @@ public class DumbComputer : MonoBehaviour
                     //print("1");
 
                     finalPosition = new Vector3(e.x, 0, e.z + 1);
-                    enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position = finalPosition;
+
+                    enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.GetComponent<Animator>().Play("Walk Forward");
+
+                    StartCoroutine(WalkAnimation(enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel, finalPosition, 12f));
+
                     GlobalVars.UpdateOccupied(enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector, gv);
 
                     enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector = gv;
@@ -112,7 +116,11 @@ public class DumbComputer : MonoBehaviour
                     //print("2");
 
                     finalPosition = new Vector3(e.x, 0, e.z - 1);
-                    enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position = finalPosition;
+
+                    enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.GetComponent<Animator>().Play("Walk Forward");
+
+                    StartCoroutine(WalkAnimation(enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel, finalPosition, 12f));
+
                     GlobalVars.UpdateOccupied(enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector, gv);
                     
                     enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector = gv;
@@ -129,7 +137,11 @@ public class DumbComputer : MonoBehaviour
                         //print("3");
 
                         finalPosition = new Vector3((e.x - 1), 0, e.z);
-                        enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position = finalPosition;
+
+                        enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.GetComponent<Animator>().Play("Walk Forward");
+
+                        StartCoroutine(WalkAnimation(enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel, finalPosition, 12f));
+
                         GlobalVars.UpdateOccupied(enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector, gv);
 
                         enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector = gv;
@@ -145,19 +157,35 @@ public class DumbComputer : MonoBehaviour
                         //print("4");
 
                         finalPosition = new Vector3((e.x + 1), 0, e.z);
-                        enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position = finalPosition;                        
-                        GlobalVars.UpdateOccupied(enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector, gv);
 
+                        enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel.GetComponent<Animator>().Play("Walk Forward");
+
+                        StartCoroutine(WalkAnimation(enemyCurr.GetComponent<attachableUnitDetails>()._class.unitBoardModel, finalPosition, 12f));
+
+                        GlobalVars.UpdateOccupied(enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector, gv);
+                        
                         enemyCurr.GetComponent<attachableUnitDetails>()._class.gridVector = gv;
                     }
-
                 }
+
             }
 
             //print("Final position: " + finalPosition);
         }
 
         turnController.DrawHealth();
+    }
+
+    private IEnumerator WalkAnimation(GameObject unit, Vector3 finishPosition, float time)
+    {
+        float elapsedTime = 0;
+
+        while (elapsedTime < time)
+        {
+            unit.transform.position = Vector3.Lerp(unit.transform.position, finishPosition, (elapsedTime / time));
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public void CheckPlayerDead(GameObject player)
