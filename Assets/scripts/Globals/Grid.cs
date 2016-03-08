@@ -14,9 +14,6 @@ public class Grid : MonoBehaviour
     {
         scriptManager = GameObject.Find("ScriptManager").GetComponent<ScriptManager>();
         turnController = scriptManager.turnController;
-
-        //GlobalVars.OccupiedGrid.Add(new GridVector(2, 2));
-        //GlobalVars.OccupiedGrid.Add(new GridVector(5, 3));
     }
 
     public GridVector CheckforHuman(GridVector g)

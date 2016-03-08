@@ -23,6 +23,7 @@ public class TurnController : MonoBehaviour
     public GameObject healthCanvas;
     public GameObject healthUIObject;
     public GameObject selectedTile;
+    public GameObject obstacle;
 
     public Queue<GameObject> actionOrder = new Queue<GameObject>();
 
@@ -36,8 +37,8 @@ public class TurnController : MonoBehaviour
         unitstore = scriptManager.unitStore;
         dumbComputer = scriptManager.dumbComputer;
         guiController = scriptManager.guiController;
-
-        // Calling the SetUpPhase
+        
+        addObstacles();
 
         SetUpPhase();        
     }
@@ -135,6 +136,34 @@ public class TurnController : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1);
+    }
+
+    public void addObstacles()
+    {
+        int turnCount;
+
+        for (int i = 0; i < 3; ++i)
+        {
+            bool foundPlace = false;
+            int x = 0;
+            int z = 0;
+
+            turnCount = 0;
+
+            while (!foundPlace || turnCount < 10)
+            {
+                x = Random.Range(1, GlobalVars.GridSize);
+                z = Random.Range(GlobalVars.StartRowCount + 2, GlobalVars.GridSize);
+
+                foundPlace = GlobalVars.CheckGridSpace(null, x, z);
+
+                turnCount++;
+            }
+
+            Instantiate(obstacle, new Vector3(x, 0, z), Quaternion.identity);
+
+            GlobalVars.OccupiedGrid.Add(new GridVector(x, z));
+        }
     }
 
     public void ButtonUpdate(GameObject go, int updateThis)

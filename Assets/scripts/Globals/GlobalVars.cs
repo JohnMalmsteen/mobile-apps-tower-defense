@@ -60,8 +60,9 @@ public class GlobalVars
 
     public static bool CheckGridSpace(GridVector curr,int x, int z)
     {
-        if (curr.x == x && curr.z == z)
-            return false;
+        if(curr != null)
+            if (curr.x == x && curr.z == z)
+                return false;
 
         foreach (GridVector gv in OccupiedGrid)
         {
