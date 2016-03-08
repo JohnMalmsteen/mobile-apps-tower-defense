@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 36ba5970d1fb35745bcf688bb789511b
-timeCreated: 1449539871
+timeCreated: 1457395749
 licenseType: Free
 SubstanceImporter:
   serializedVersion: 5
@@ -9,7 +9,7 @@ SubstanceImporter:
     name: Brick 4
     prototypeName: brick_clean_white
     shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
-    shaderKeywords: 
+    shaderKeywords: _NORMALMAP _PARALLAXMAP _SPECGLOSSMAP
     renderQueue: -1
     lightmapFlags: 5
     inputs:
@@ -223,7 +223,7 @@ SubstanceImporter:
         data:
           first:
             name: _Color
-          second: {r: 1, g: 1, b: 1, a: 1}
+          second: {r: 0, g: 0, b: 0, a: 1}
         data:
           first:
             name: _SpecColor

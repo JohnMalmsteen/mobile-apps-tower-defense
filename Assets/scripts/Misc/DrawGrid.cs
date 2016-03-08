@@ -8,7 +8,7 @@ public class DrawGrid : MonoBehaviour
 
     private List<Vector3> LinePoints;
 
-    private float GridHeight = 0.01f;
+    private float GridHeight = 0.075f;
     private float LineWidth = 0.2f;
     private string LineName = "Vectrosity Grid Line";
     private string VectrosityCamera = "VectrosityCamera";
@@ -61,13 +61,15 @@ public class DrawGrid : MonoBehaviour
 
     void CreateClickableTile()
     {
-        for (int i = 0; i <= GridSize; i++)
+        for (int i = 1; i <= GridSize; i++)
         {
-            for (int j = 0; j <= GridSize; j++)
+            for (int j = 1; j <= GridSize; j++)
             {
-                GameObject temp = Instantiate(clickableTile, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                GameObject temp = Instantiate(clickableTile, new Vector3(i, 0.2f, j), Quaternion.identity) as GameObject;
 
                 temp.gameObject.name = i + " : " + j;
+
+                temp.GetComponent<PlaceorMove>().setGrid(i, j);
 
                 temp.transform.SetParent(clickableTileParent.transform);
             }

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 7dd7069eedcbfef4cbc6545bd7d3fc84
-timeCreated: 1449539700
+timeCreated: 1457395694
 licenseType: Free
 SubstanceImporter:
   serializedVersion: 5
@@ -175,14 +175,14 @@ SubstanceImporter:
             name: _MainTex
           second:
             texture: {instanceID: 0}
-            scale: {x: 1, y: 1}
+            scale: {x: 4, y: 4}
             offset: {x: 0, y: 0}
         data:
           first:
             name: _BumpMap
           second:
             texture: {instanceID: 0}
-            scale: {x: 1, y: 1}
+            scale: {x: 4, y: 4}
             offset: {x: 0, y: 0}
         data:
           first:
@@ -196,7 +196,7 @@ SubstanceImporter:
             name: _ParallaxMap
           second:
             texture: {instanceID: 0}
-            scale: {x: 1, y: 1}
+            scale: {x: 4, y: 4}
             offset: {x: 0, y: 0}
         data:
           first:
@@ -290,7 +290,7 @@ SubstanceImporter:
         data:
           first:
             name: _Color
-          second: {r: 1, g: 1, b: 1, a: 1}
+          second: {r: .382352948, g: .382352948, b: .382352948, a: 1}
     textureParameters:
     - name: Roof_Diffuse
       alphaSource: 6

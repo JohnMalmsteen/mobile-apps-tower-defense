@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 488219d29a4771240853b6c8b57a641d
-timeCreated: 1449539665
+timeCreated: 1457395724
 licenseType: Free
 SubstanceImporter:
   serializedVersion: 5
@@ -112,14 +112,14 @@ SubstanceImporter:
             name: _MainTex
           second:
             texture: {instanceID: 0}
-            scale: {x: 1, y: 1}
+            scale: {x: 4, y: 4}
             offset: {x: 0, y: 0}
         data:
           first:
             name: _BumpMap
           second:
             texture: {instanceID: 0}
-            scale: {x: 1, y: 1}
+            scale: {x: 4, y: 4}
             offset: {x: 0, y: 0}
         data:
           first:
@@ -133,14 +133,14 @@ SubstanceImporter:
             name: _ParallaxMap
           second:
             texture: {instanceID: 0}
-            scale: {x: 1, y: 1}
+            scale: {x: 4, y: 4}
             offset: {x: 0, y: 0}
         data:
           first:
             name: _OcclusionMap
           second:
             texture: {instanceID: 0}
-            scale: {x: 1, y: 1}
+            scale: {x: 4, y: 4}
             offset: {x: 0, y: 0}
         data:
           first:
@@ -168,7 +168,7 @@ SubstanceImporter:
             name: _SpecGlossMap
           second:
             texture: {instanceID: 0}
-            scale: {x: 1, y: 1}
+            scale: {x: 4, y: 4}
             offset: {x: 0, y: 0}
       floats:
         data:
@@ -223,7 +223,7 @@ SubstanceImporter:
         data:
           first:
             name: _Color
-          second: {r: 1, g: 1, b: 1, a: 1}
+          second: {r: .433823526, g: .427443773, b: .427443773, a: .222000003}
         data:
           first:
             name: _SpecColor

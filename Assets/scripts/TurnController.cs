@@ -22,6 +22,7 @@ public class TurnController : MonoBehaviour
     public GameObject activeTile;
     public GameObject healthCanvas;
     public GameObject healthUIObject;
+    public GameObject selectedTile;
 
     public Queue<GameObject> actionOrder = new Queue<GameObject>();
 
@@ -99,6 +100,8 @@ public class TurnController : MonoBehaviour
                 GlobalVars.PLAYER_TURN = true;
 
                 currentTurnUnit = GetInitUnit(unitTurn);
+
+                selectedTile.transform.position = currentTurnUnit.transform.position;
 
                 //predictiveTile.ShowMovementSquares(currentTurnUnit.GetComponent<attachableUnitDetails>()._class.gridVector,1);
 

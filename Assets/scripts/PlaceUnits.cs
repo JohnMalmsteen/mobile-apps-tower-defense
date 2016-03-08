@@ -6,7 +6,6 @@ public class PlaceUnits : MonoBehaviour
 {
     ScriptManager scriptManager;
     guiController guiController;
-    MouseTile mouseTile;
     TurnController turnController;
     InfoPanel infopanel;
 
@@ -15,7 +14,6 @@ public class PlaceUnits : MonoBehaviour
         scriptManager = GameObject.Find("ScriptManager").GetComponent<ScriptManager>();
         guiController = scriptManager.guiController;
         turnController = scriptManager.turnController;
-        mouseTile = scriptManager.mouseTile;
         infopanel = scriptManager.infopanel;
     }
 
@@ -45,10 +43,8 @@ public class PlaceUnits : MonoBehaviour
         guiController.unitPlacePanel.SetActive(true);
 
         GlobalVars.PLACE_MODE = true;
-        mouseTile.SelectedTile.gameObject.GetComponent<MeshRenderer>().enabled = false;
 
         while(count < TurnController.playerUnits.Count)
-        //foreach (GameObject go in TurnController.playerUnits)
         {
             TurnController.playerUnits[count].gameObject.GetComponent<attachableUnitDetails>()._class.unitButton.SetActive(true);
             Destroy(TurnController.playerUnits[count].gameObject.GetComponent<attachableUnitDetails>()._class.unitBoardModel);
