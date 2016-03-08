@@ -14,6 +14,7 @@ public class PlaceorMove : MonoBehaviour, IPointerClickHandler, IPointerDownHand
     DumbComputer dumbComputer;
     MessageController messageController;
     Grid gridscr;
+    CameraController cameraController;
 
     public Material playMat;
     public GameObject playerPieces;
@@ -30,6 +31,7 @@ public class PlaceorMove : MonoBehaviour, IPointerClickHandler, IPointerDownHand
         messageController = scriptManager.messageController;
         gridscr = scriptManager.grid;
         placeunits = scriptManager.placeUnits;
+        cameraController = scriptManager.cameraController;
 
         playerPieces = GameObject.Find("PlayerPieces");
     }
@@ -216,7 +218,8 @@ public class PlaceorMove : MonoBehaviour, IPointerClickHandler, IPointerDownHand
 
     private void AttackAnimation(GameObject unit, GameObject victim)
     {
-        unit.transform.LookAt(victim.transform);
+        cameraController.ShowBattle(unit, victim);
+
         unit.GetComponent<Animator>().Play("Attack");
     }
 

@@ -3,31 +3,46 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour
 {
-    public Camera[] AltCam;
-
-    int cameraCount = 0;
-    int max = 0;
+    public GameObject battleCamera;
+    Vector3 cameraDefaultPosition;
+    Quaternion cameraDefaultRotation;
 
     public void Start()
     {
-        max = AltCam.Length;
-
-        //print("max cam: " + max);
+        cameraDefaultPosition = Camera.main.gameObject.transform.position;
+        cameraDefaultRotation = Camera.main.gameObject.transform.rotation;
     }
 
-    public void ChangeView()
+    public void ShowBattle(GameObject perp, GameObject victim)
     {
-        for(int i = 0; i < max; i++)
-        {
-            AltCam[i].enabled = false;
-        }
+        //StartCoroutine(ShowBattleEvent(perp, victim));
+    }
 
-        if (cameraCount < max)
-            AltCam[cameraCount].enabled = true;
-        else
-            cameraCount = -1;
+    IEnumerator ShowBattleEvent(GameObject perp, GameObject victim)
+    {
+        Vector3 midpoint = (perp.transform.position + victim.transform.position) / 2;
 
-        cameraCount++;
+        print("Midpoint: " + midpoint);
+
+        midpoint = new Vector3(midpoint.x, 0.5f, midpoint.z);
+
+        battleCamera.transform.position = midpoint;
+
+        print("battleCamera.transform.position: " + battleCamera.transform.position);
+
+        //iTween.MoveTo(Camera.main.gameObject, battleCamera.gameObject.transform.position, 1.0f);
+
+        yield return new WaitForSeconds(2.0f);
+
+        resetCamera();
+    }
+
+    public void resetCamera()
+    {
+        print("Reset");
+
+        Camera.main.gameObject.transform.position = cameraDefaultPosition;
+        Camera.main.gameObject.transform.rotation = cameraDefaultRotation;
     }
 
 }

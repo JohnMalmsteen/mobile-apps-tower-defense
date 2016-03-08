@@ -16,6 +16,9 @@ public class DrawGrid : MonoBehaviour
     public GameObject clickableTile;
     public GameObject clickableTileParent;
 
+    public Material MarbleBlack;
+    public Material MarbleWhite;
+
     void Start()
     {
         GridSize = GlobalVars.GridSize;
@@ -25,7 +28,7 @@ public class DrawGrid : MonoBehaviour
 
         // Init Stuff
 
-        CreateGridLines();
+        //CreateGridLines();
 
         // Creating array of lines
 
@@ -61,17 +64,26 @@ public class DrawGrid : MonoBehaviour
 
     void CreateClickableTile()
     {
+        int count = 0;
+
         for (int i = 1; i <= GridSize; i++)
         {
             for (int j = 1; j <= GridSize; j++)
             {
-                GameObject temp = Instantiate(clickableTile, new Vector3(j, 0.2f, i), Quaternion.identity) as GameObject;
+                GameObject temp = Instantiate(clickableTile, new Vector3(j, 0.06f, i), Quaternion.identity) as GameObject;
 
                 temp.gameObject.name = j + " : " + i;
 
                 temp.GetComponent<PlaceorMove>().setGrid(j, i);
 
                 temp.transform.SetParent(clickableTileParent.transform);
+
+                if(count % 2 == 0)
+                    temp.GetComponent<MeshRenderer>().material = MarbleBlack;
+                else
+                    temp.GetComponent<MeshRenderer>().material = MarbleWhite;
+
+                ++count;
             }
         }
     }

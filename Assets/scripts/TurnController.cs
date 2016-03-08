@@ -37,7 +37,7 @@ public class TurnController : MonoBehaviour
         unitstore = scriptManager.unitStore;
         dumbComputer = scriptManager.dumbComputer;
         guiController = scriptManager.guiController;
-        
+
         addObstacles();
 
         SetUpPhase();        
@@ -142,7 +142,7 @@ public class TurnController : MonoBehaviour
     {
         int turnCount;
 
-        for (int i = 0; i < 3; ++i)
+        for (int i = 0; i < 8; ++i)
         {
             bool foundPlace = false;
             int x = 0;
@@ -150,7 +150,7 @@ public class TurnController : MonoBehaviour
 
             turnCount = 0;
 
-            while (!foundPlace || turnCount < 10)
+            while (!foundPlace || turnCount < 40) // just in case
             {
                 x = Random.Range(1, GlobalVars.GridSize);
                 z = Random.Range(GlobalVars.StartRowCount + 2, GlobalVars.GridSize);

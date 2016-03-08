@@ -11,6 +11,7 @@ public class DumbComputer : MonoBehaviour
     SpritesModels spriteModels;
     TurnController turnController;
     MessageController messageController;
+    CameraController cameraController;
     Grid grid;
 
     int x, z;
@@ -21,7 +22,8 @@ public class DumbComputer : MonoBehaviour
         spriteModels = scriptManager.spriteModels;
         turnController = scriptManager.turnController;
         messageController = scriptManager.messageController;
-        
+        cameraController = scriptManager.cameraController;
+
         grid = scriptManager.grid;
     }
 
@@ -192,7 +194,7 @@ public class DumbComputer : MonoBehaviour
 
     private void AttackAnimation(GameObject unit,GameObject victim)
     {
-        unit.transform.LookAt(victim.transform);
+        cameraController.ShowBattle(unit, victim);
         unit.GetComponent<Animator>().Play("Attack");
     }
 
