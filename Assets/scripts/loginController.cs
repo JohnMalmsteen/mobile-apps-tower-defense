@@ -44,7 +44,7 @@ public class loginController : MonoBehaviour {
 		request.Send();
 
 		yield return StartCoroutine(request);
-
+		Debug.Log (request.Response.DataAsText);
 		if (request.Response.StatusCode == 200) {
 			Debug.Log ("success");
 			JObject o = JObject.Parse (request.Response.DataAsText);
