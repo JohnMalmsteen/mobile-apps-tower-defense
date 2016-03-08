@@ -150,55 +150,8 @@ public class PlaceorMove : MonoBehaviour, IPointerClickHandler, IPointerDownHand
                 }
                 else
                 {
-                    // Try attack
 
-                    //print("try attack");
-
-                    bool canAttack = false;
-
-                    if ((gv.x + 1) == temp.x && gv.z == temp.z)
-                    {
-                        canAttack = true;
-                    }
-
-                    if ((gv.x - 1) == temp.x && gv.z == temp.z)
-                    {
-                        canAttack = true;
-                    }
-
-                    if (gv.x == temp.x && (gv.z + 1) == temp.z)
-                    {
-                        canAttack = true;
-                    }
-
-                    if (gv.x == temp.x && (gv.z - 1) == temp.z)
-                    {
-                        canAttack = true;
-                    }
-
-                    ////////////////////////////////////////////////////////////////
-
-                    if ((gv.x + 1) == temp.x && (gv.z + 1) == temp.z)
-                    {
-                        canAttack = true;
-                    }
-
-                    if ((gv.x - 1) == temp.x && (gv.z + 1) == temp.z)
-                    {
-                        canAttack = true;
-                    }
-
-                    if ((gv.x + 1) == temp.x && (gv.z - 1) == temp.z)
-                    {
-                        canAttack = true;
-                    }
-
-                    if ((gv.x - 1) == temp.x && (gv.z - 1) == temp.z)
-                    {
-                        canAttack = true;
-                    }
-
-                    if (canAttack && gridscr.CheckforHuman(gv) == null) // Stops player from attacking himself
+                    if(Grid.CheckImmediateAdjacencyOnGrid(tempgv, temp) && gridscr.CheckforHumanThere(temp))
                     {
                         GlobalVars.PLAYER_TURN = false;
 
@@ -216,15 +169,15 @@ public class PlaceorMove : MonoBehaviour, IPointerClickHandler, IPointerDownHand
 
                         dumbComputer.CheckComputerDead(go);
 
+                        AttackAnimation(turnController.currentTurnUnit.GetComponent<attachableUnitDetails>()._class.unitBoardModel, go);
+
                         turnController.unitTurn++;
                     }
                     else
-                        print("Not Attacking: " + canAttack);
+                        print("Not Attacking: " + Grid.CheckImmediateAdjacencyOnGrid(tempgv, temp) + " : " + gridscr.CheckforHuman(gv) == null);
 
                     turnController.DrawHealth();
                 }
-
-                ////////////////////////////////////////
 
                 SelectedTile.transform.position = finalPosition;
 
@@ -238,21 +191,33 @@ public class PlaceorMove : MonoBehaviour, IPointerClickHandler, IPointerDownHand
 
     public void walkUnitToSpace(GameObject unit,Vector3 walkToHere)
     {
-        turnController.currentTurnUnit.GetComponent<attachableUnitDetails>()._class.unitBoardModel.GetComponent<Animator>().Play("Walk Forward");
-
-        StartCoroutine(WalkAnimation(unit, walkToHere, 12f));
+        StartCoroutine(WalkAnimation(unit, walkToHere, 8f));
     }
 
     private IEnumerator WalkAnimation(GameObject unit,Vector3 finishPosition,float time)
     {
         float elapsedTime = 0;
-
+        bool walking = false;
+        
         while (elapsedTime < time)
         {
             unit.transform.position = Vector3.Lerp(unit.transform.position, finishPosition, (elapsedTime / time));
             elapsedTime += Time.deltaTime;
+
             yield return new WaitForEndOfFrame();
+
+            if (!walking)
+            {
+                walking = true;
+                unit.GetComponent<Animator>().Play("Walk Forward");
+            }
         }
+    }
+
+    private void AttackAnimation(GameObject unit, GameObject victim)
+    {
+        unit.transform.LookAt(victim.transform);
+        unit.GetComponent<Animator>().Play("Attack");
     }
 
     public void CreatePlayerPiece(Vector3 finalPosition, int xi, int zi)

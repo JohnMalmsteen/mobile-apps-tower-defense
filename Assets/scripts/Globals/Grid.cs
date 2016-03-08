@@ -16,6 +16,14 @@ public class Grid : MonoBehaviour
         turnController = scriptManager.turnController;
     }
 
+    public bool CheckforHumanThere(GridVector g)
+    {
+        if (turnController.GetUnitAt(g).GetComponent<attachableUnitDetails>().owner == 0)
+            return false;
+        else
+            return true;
+    }
+
     public GridVector CheckforHuman(GridVector g)
     {
         //print("Count: " + GlobalVars.OccupiedGrid.Count);

@@ -65,11 +65,11 @@ public class DrawGrid : MonoBehaviour
         {
             for (int j = 1; j <= GridSize; j++)
             {
-                GameObject temp = Instantiate(clickableTile, new Vector3(i, 0.2f, j), Quaternion.identity) as GameObject;
+                GameObject temp = Instantiate(clickableTile, new Vector3(j, 0.2f, i), Quaternion.identity) as GameObject;
 
-                temp.gameObject.name = i + " : " + j;
+                temp.gameObject.name = j + " : " + i;
 
-                temp.GetComponent<PlaceorMove>().setGrid(i, j);
+                temp.GetComponent<PlaceorMove>().setGrid(j, i);
 
                 temp.transform.SetParent(clickableTileParent.transform);
             }
