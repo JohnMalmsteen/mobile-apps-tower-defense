@@ -33,7 +33,7 @@ public class loginController : MonoBehaviour {
 	}
 
 	public IEnumerator LogIn(string user, string pass){
-		string loginURI = "http://127.0.0.1:5000/login/";
+		string loginURI = "http://nebinstower.cloudapp.net:5000/login/";
 		string jsonString = "{\"username\": \"" + user + "\", \"password\": \"" + pass + "\"}";
 
 		HTTPRequest request = new HTTPRequest (new System.Uri (loginURI), HTTPMethods.Post);
@@ -56,7 +56,7 @@ public class loginController : MonoBehaviour {
 
 			loginComplete ();
 		} else if (request.Response.StatusCode == 404) {
-			string registerURI = "http://127.0.0.1:5000/register/";
+			string registerURI = "http://nebinstower.cloudapp.net:5000/register/";
 			request = new HTTPRequest (new System.Uri (registerURI), HTTPMethods.Post);
 
 			request.RawData = Encoding.UTF8.GetBytes (jsonString);
@@ -99,7 +99,7 @@ public class loginController : MonoBehaviour {
 	}
 
 	public IEnumerator loadCharacters(){
-		string loadURL = "http://127.0.0.1:5000/loadCharacters/";
+		string loadURL = "http://nebinstower.cloudapp.net:5000/loadCharacters/";
 
 		string token = PlayerPrefs.GetString ("token");
 		string user = PlayerPrefs.GetString ("username");
@@ -123,7 +123,7 @@ public class loginController : MonoBehaviour {
 	public IEnumerator saveCharacters(){
 		Fighter f = new Fighter ();
 
-		string saveURL = "http://127.0.0.1:5000/saveCharacters/";
+		string saveURL = "http://nebinstower.cloudapp.net:5000/saveCharacters/";
 
 		string token = PlayerPrefs.GetString ("token");
 		string user = PlayerPrefs.GetString ("username");
