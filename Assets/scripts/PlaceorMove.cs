@@ -171,6 +171,8 @@ public class PlaceorMove : MonoBehaviour, IPointerClickHandler, IPointerDownHand
 
                         AttackAnimation(turnController.currentTurnUnit.GetComponent<attachableUnitDetails>()._class.unitBoardModel, go);
 
+                        GlobalVars.GoldCount += 50;
+
                         turnController.unitTurn++;
                     }
                     else

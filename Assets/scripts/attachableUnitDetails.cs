@@ -1,16 +1,18 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 public class attachableUnitDetails : MonoBehaviour, IComparer {
 
 	public int owner;
 	public int gold;
-	public List<Weapon> inventoryWeapons =  new List<Weapon>();
+
+    public List<Weapon> inventoryWeapons =  new List<Weapon>();
 	public Weapon currentEquippedWeapon;
-	public Unit unit;
+    public Unit unit;
 	public ClassType _class;
-	public List<Action> availableActions = new List<Action>();
+    public List<Action> availableActions = new List<Action>();
 
 	public void LevelUp()
 	{

@@ -91,8 +91,9 @@ public class loginController : MonoBehaviour {
 	}
 
 	public void save(){
-		StartCoroutine (saveCharacters());
-	}
+		//StartCoroutine (saveCharacters());
+        StartCoroutine(saveCharactersTest());
+    }
 
 	public void load(){
 		StartCoroutine (loadCharacters ());
@@ -120,7 +121,55 @@ public class loginController : MonoBehaviour {
 
 	}
 
-	public IEnumerator saveCharacters(){
+    public IEnumerator loadCharactersTest()
+    {
+        string loadURL = "http://nebinstower.cloudapp.net:5000/loadCharacters/";
+
+        string token = PlayerPrefs.GetString("token");
+        string user = PlayerPrefs.GetString("username");
+
+        string jsonString = "{\"username\": \"" + user + "\", \"token\": \"" + token + "\"}";
+
+        HTTPRequest request = new HTTPRequest(new System.Uri(loadURL), HTTPMethods.Post);
+
+        request.RawData = Encoding.UTF8.GetBytes(jsonString);
+        request.AddHeader("Content-Type", "application/json");
+        request.Send();
+
+        yield return StartCoroutine(request);
+
+        Debug.Log(request.Response.DataAsText);
+
+        SaveState f = JsonConvert.DeserializeObject<SaveState>(request.Response.DataAsText);
+
+        GameObject.Find("LOADER").GetComponent<Loader>().saveState.GoldCount = f.GoldCount;
+
+        Application.LoadLevel("main");
+    }
+
+    public IEnumerator saveCharactersTest()
+    {
+        string saveURL = "http://nebinstower.cloudapp.net:5000/saveCharacters/";
+
+        string token = PlayerPrefs.GetString("token");
+        string user = PlayerPrefs.GetString("username");
+
+        string jsonString = "{\"username\": \"" + user + "\", \"token\": \"" + token + "\", \"savedata\": " + JsonConvert.SerializeObject(Loader.Instance.saveState) + "}";
+
+        HTTPRequest request = new HTTPRequest(new System.Uri(saveURL), HTTPMethods.Post);
+
+        request.RawData = Encoding.UTF8.GetBytes(jsonString);
+        request.AddHeader("Content-Type", "application/json");
+        request.Send();
+
+        yield return StartCoroutine(request);
+
+        Debug.Log(JsonConvert.SerializeObject(Loader.Instance.saveState));
+        Debug.Log(request.Response.DataAsText);
+    }
+
+
+    public IEnumerator saveCharacters(){
 		Fighter f = new Fighter ();
 
 		string saveURL = "http://nebinstower.cloudapp.net:5000/saveCharacters/";
@@ -140,6 +189,8 @@ public class loginController : MonoBehaviour {
 
 		Debug.Log (request.Response.DataAsText);
 	}
+
+
 
 	public void returnToMain(){
 		Application.LoadLevel ("main");

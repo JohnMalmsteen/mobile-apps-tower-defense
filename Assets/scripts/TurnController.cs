@@ -10,6 +10,9 @@ public class TurnController : MonoBehaviour
     DumbComputer dumbComputer;
     guiController guiController;
 
+    public GameObject btnSave;
+    public GameObject btnCam;
+
     public static List<GameObject> playerUnits = new List<GameObject>();
     public static List<GameObject> compUnits = new List<GameObject>();
     public static SortedDictionary<int, GameObject> initiative = new SortedDictionary<int, GameObject>();
@@ -340,6 +343,9 @@ public class TurnController : MonoBehaviour
 
             ++count;
         }
+
+        btnSave.gameObject.SetActive(true);
+        btnCam.gameObject.SetActive(true);
     }
 
     ////////////////////////////////////////////////////////////

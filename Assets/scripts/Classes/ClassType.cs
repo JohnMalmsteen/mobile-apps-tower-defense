@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Newtonsoft.Json;
 
 public abstract class ClassType {
 	public string babType = "average";
