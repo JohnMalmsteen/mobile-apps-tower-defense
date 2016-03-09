@@ -168,8 +168,6 @@ public class DumbComputer : MonoBehaviour
 
             //print("Final position: " + finalPosition);
         }
-
-        turnController.DrawHealth();
     }
 
     private IEnumerator WalkAnimation(GameObject unit, Vector3 finishPosition, float time)
@@ -190,6 +188,8 @@ public class DumbComputer : MonoBehaviour
                 unit.GetComponent<Animator>().Play("Walk Forward");
             }
         }
+        
+        turnController.DrawHealth();
     }
 
     private void AttackAnimation(GameObject unit,GameObject victim)
@@ -228,14 +228,14 @@ public class DumbComputer : MonoBehaviour
             GlobalVars.PlayerAliveCount--;
         }
 
-        if(GlobalVars.PlayerAliveCount < 0)
+        if (GlobalVars.PlayerAliveCount < 1)
         {
-            Application.LoadLevel("testScene");
+            Application.LoadLevel("losescreen");
         }
 
-        if (GlobalVars.CompAliveCount < 0)
+        if (GlobalVars.CompAliveCount < 1)
         {
-            Application.LoadLevel("testScene");
+            Application.LoadLevel("win");
         }
 
         /*
@@ -246,6 +246,8 @@ public class DumbComputer : MonoBehaviour
             Destroy(player);
         }
         */
+
+        turnController.DrawHealth();
     }
 
     public void CheckComputerDead(GameObject player)
@@ -266,9 +268,15 @@ public class DumbComputer : MonoBehaviour
 
             if (found)
             {
-                //print("Removed Player");
+                print("Removed Player: " + player.gameObject.GetComponent<attachableUnitDetails>()._class.gridVector);
 
                 TurnController.initiative.Remove(k);
+
+                print("Before: " + GlobalVars.OccupiedGrid.Count);
+
+                GlobalVars.Remove(player.gameObject.GetComponent<attachableUnitDetails>()._class.gridVector);
+
+                print("After: " + GlobalVars.OccupiedGrid.Count);
             }
 
 
@@ -278,14 +286,14 @@ public class DumbComputer : MonoBehaviour
             GlobalVars.CompAliveCount--;
         }
 
-        if (GlobalVars.PlayerAliveCount < 0)
+        if (GlobalVars.PlayerAliveCount < 1)
         {
-            Application.LoadLevel("testScene");
+            Application.LoadLevel("losescreen");
         }
 
-        if (GlobalVars.CompAliveCount < 0)
+        if (GlobalVars.CompAliveCount < 1)
         {
-            Application.LoadLevel("testScene");
+            Application.LoadLevel("win");
         }
 
         /*
@@ -296,6 +304,8 @@ public class DumbComputer : MonoBehaviour
             Destroy(player);
         }
         */
+
+        turnController.DrawHealth();
     }
 
     public int CostDistance(GameObject enemy,GameObject player)

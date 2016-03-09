@@ -16,19 +16,25 @@ public class MiniGame : MonoBehaviour {
 
         foreach (GameObject go in Archers)
         {
-            dead.Add(go);
+            notDead.Add(go);
         }
     }
 
     public void ImDead(GameObject go)
     {
         notDead.Remove(go);
+        dead.Add(go);
     }
 
     void FixedUpdate()
     {
-        if (AmountDead() > (Archers.Length / 2))
+        if (AmountDead() > 3)
+        {
+            print(AmountDead());
             Respawn();
+        }
+        else
+            print(AmountDead());
     }
 
     int AmountDead()
@@ -38,32 +44,42 @@ public class MiniGame : MonoBehaviour {
 
     void Respawn()
     {
-        GameObject temp = dead[0];
+        if (dead.Count != 0)
+        {
+            GameObject temp = dead[0];
 
-        notDead.Add(temp);
+            print(temp.name);
 
-        dead.Remove(temp);
+            notDead.Add(temp);
 
-        StartCoroutine(UnHide(temp)); // notDead.Peek().gameObject.transform;
+            dead.Remove(temp);
+
+            StartCoroutine(UnHide(temp)); // notDead.Peek().gameObject.transform;
+        }
     }
 
     IEnumerator UnHide(GameObject unit)
     {
-        float elapsedTime = 0;
-        float time = 20.0f;
-
-        Vector3 hiddenPosition = unit.transform.position;
-        Vector3 finishPosition = new Vector3(hiddenPosition.x, hiddenPosition.y + 1.5f, hiddenPosition.z);
-
-        //print("Unhiding: " + unit.gameObject.name);
-
-        while (elapsedTime < time)
+        if(!unit.GetComponent<Dead>().DEAD)
         {
-            unit.transform.position = Vector3.Lerp(unit.transform.position, finishPosition, (elapsedTime / time));
-            elapsedTime += Time.deltaTime;
+            float elapsedTime = 0;
+            float time = 50.0f;
 
-            yield return new WaitForEndOfFrame();
+            Vector3 hiddenPosition = unit.transform.position;
+            Vector3 finishPosition = new Vector3(hiddenPosition.x, hiddenPosition.y + 1.5f, hiddenPosition.z);
+
+            //print("Unhiding: " + unit.gameObject.name);
+
+            unit.GetComponent<Dead>().DEAD = false;
+
+            while (elapsedTime < time)
+            {
+                unit.transform.position = Vector3.Lerp(unit.transform.position, finishPosition, (elapsedTime / time));
+                elapsedTime += Time.deltaTime;
+
+                yield return new WaitForEndOfFrame();
+            }
         }
-    }
+     }
 
 }

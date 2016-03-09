@@ -141,8 +141,6 @@ public class PlaceorMove : MonoBehaviour, IPointerClickHandler, IPointerDownHand
 
                         turnController.currentTurnUnit.GetComponent<attachableUnitDetails>()._class.gridVector = new GridVector(temp.x, temp.z);
 
-                        turnController.DrawHealth();
-
                         turnController.unitTurn++;
                     }
 
@@ -200,7 +198,9 @@ public class PlaceorMove : MonoBehaviour, IPointerClickHandler, IPointerDownHand
     {
         float elapsedTime = 0;
         bool walking = false;
-        
+
+        turnController.DrawHealth();
+
         while (elapsedTime < time)
         {
             unit.transform.position = Vector3.Lerp(unit.transform.position, finishPosition, (elapsedTime / time));
@@ -214,6 +214,8 @@ public class PlaceorMove : MonoBehaviour, IPointerClickHandler, IPointerDownHand
                 unit.GetComponent<Animator>().Play("Walk Forward");
             }
         }
+        
+        turnController.DrawHealth();
     }
 
     private void AttackAnimation(GameObject unit, GameObject victim)

@@ -23,6 +23,19 @@ public class GlobalVars
     public static int MAX_UNITS = 3;
     public static List<GridVector> OccupiedGrid = new List<GridVector>();
     
+    void Update()
+    {
+        if (GlobalVars.PlayerAliveCount < 1)
+        {
+            Application.LoadLevel("losescreen");
+        }
+
+        if (GlobalVars.CompAliveCount < 1)
+        {
+            Application.LoadLevel("win");
+        }
+    }
+
     public static void UpdateOccupied(GridVector oldGv, GridVector newGv)
     {
         int count = 0;
@@ -79,10 +92,13 @@ public class GlobalVars
         int pos = 0;
         bool found = false;
 
+        Debug.Log("Removing");
+
         foreach (GridVector g in OccupiedGrid)
         {
             if(g.x == gv.x && g.z == gv.z)
             {
+                Debug.Log("Found");
                 pos = count;
                 found = true;
             }
@@ -92,6 +108,7 @@ public class GlobalVars
 
         if(found)
         {
+            Debug.Log("Removed properly");
             OccupiedGrid.RemoveAt(pos);
         }
     }

@@ -349,43 +349,53 @@ public class TurnController : MonoBehaviour
         int health = 0;
         float offset = 0.0f;
 
-        foreach (Transform child in healthCanvas.transform)
+        try
         {
-            GameObject.Destroy(child.gameObject);
+
+            foreach (Transform child in healthCanvas.transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+
+            foreach (GameObject go in playerUnits)
+            {
+                health = go.GetComponent<attachableUnitDetails>().unit.health;
+
+                Vector3 screenPosition = Camera.main.WorldToScreenPoint(go.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position);
+
+                screenPosition = new Vector3(screenPosition.x + offset, screenPosition.y, screenPosition.z);
+
+                GameObject ui = Instantiate(healthUIObject, screenPosition, Quaternion.identity) as GameObject;
+
+                ui.GetComponent<Image>().color = Color.green;
+
+                ui.GetComponentInChildren<Text>().text = "HP: " + health;
+
+                ui.transform.SetParent(healthCanvas.gameObject.transform);
+            }
+
+            foreach (GameObject go in compUnits)
+            {
+                health = go.GetComponent<attachableUnitDetails>().unit.health;
+
+                try
+                {
+                    Vector3 screenPosition = Camera.main.WorldToScreenPoint(go.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position);
+
+                    screenPosition = new Vector3(screenPosition.x + offset, screenPosition.y, screenPosition.z);
+
+                    GameObject ui = Instantiate(healthUIObject, screenPosition, Quaternion.identity) as GameObject;
+
+                    ui.GetComponent<Image>().color = Color.red;
+
+                    ui.GetComponentInChildren<Text>().text = "HP: " + health;
+
+                    ui.transform.SetParent(healthCanvas.gameObject.transform);
+                }
+                catch { }
+            }
         }
+        catch { }
 
-        foreach (GameObject go in playerUnits)
-        {
-            health = go.GetComponent<attachableUnitDetails>().unit.health;
-
-            Vector3 screenPosition = Camera.main.WorldToScreenPoint(go.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position);
-
-            screenPosition = new Vector3(screenPosition.x + offset, screenPosition.y, screenPosition.z);
-
-            GameObject ui = Instantiate(healthUIObject, screenPosition, Quaternion.identity) as GameObject;
-
-            ui.GetComponent<Image>().color = Color.green;
-
-            ui.GetComponentInChildren<Text>().text = "HP: " + health;
-
-            ui.transform.SetParent(healthCanvas.gameObject.transform);
-        }
-
-        foreach (GameObject go in compUnits)
-        {
-            health = go.GetComponent<attachableUnitDetails>().unit.health;
-
-            Vector3 screenPosition = Camera.main.WorldToScreenPoint(go.GetComponent<attachableUnitDetails>()._class.unitBoardModel.transform.position);
-
-            screenPosition = new Vector3(screenPosition.x + offset, screenPosition.y, screenPosition.z);
-
-            GameObject ui = Instantiate(healthUIObject, screenPosition, Quaternion.identity) as GameObject;
-
-            ui.GetComponent<Image>().color = Color.red;
-
-            ui.GetComponentInChildren<Text>().text = "HP: " + health;
-
-            ui.transform.SetParent(healthCanvas.gameObject.transform);
-        }
     }
 }

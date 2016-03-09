@@ -10,11 +10,10 @@ public class Dead : MonoBehaviour, IPointerClickHandler
     {
         print("Clicked: " + gameObject.name);
 
-        /*
-        DEAD = true;
         transform.position = new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z);
+        
+        DEAD = true;
 
         minigame.ImDead(gameObject);
-        */
     }
 }
